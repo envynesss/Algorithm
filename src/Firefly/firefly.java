@@ -13,7 +13,7 @@ class firefly implements Comparable{
     public firefly(){
         x = new double[Dims];
         for(int i=0;i<Dims;i++){
-            x[i] = Math.random();//*Constant.Range*2-Constant.Range;
+            x[i] = Math.random();//*Constant.maxRange*2-Constant.maxRange;
         }
         fitnessfun();
     }

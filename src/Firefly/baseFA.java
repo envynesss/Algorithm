@@ -11,7 +11,8 @@ public class baseFA {
     public static void main(String[] args) {
         baseSwarm swarm= new baseSwarm();
         for(int k=0;k<Constant.iterations;k++){
-            swarm.addListseed();
+            System.out.println(k+"次*********************************");
+            //swarm.addListseed();
             swarm.move();
             swarm.SortofSwarm();
 			for(int i=0;i<Constant.NumofP;i++){
@@ -21,6 +22,7 @@ public class baseFA {
 				}
 				System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
 			}
+            swarm.addListseed();
             swarm.getAccuracy();
             swarm.seedlist.clear();
         }
@@ -99,21 +101,24 @@ class baseSwarm{
      */
     public void getAccuracy(){
         List<firefly> optimallist = new ArrayList<>();
-        optimallist.add(new firefly(FunLib.f3_gpoint_1));
-        optimallist.add(new firefly(FunLib.f3_gpoint_2));
-        optimallist.add(new firefly(FunLib.f3_gpoint_3));
-        optimallist.add(new firefly(FunLib.f3_gpoint_4));
-        optimallist.add(new firefly(FunLib.f3_gpoint_5));
+        for(int m=0;m<Constant.optimalpoints.length;m++){
+            optimallist.add(new firefly(Constant.optimalpoints[m]));
+        }
         int numofoptimal = optimallist.size();
         double accuracy = 1.0/numofoptimal;
         double sum = 0;
         int num =0;
         for(int i=0;i<numofoptimal;i++){
+            boolean is_within = false;
             for(int j=0;j<seedlist.size();j++){
-                if(distance(optimallist.get(i),seedlist.get(j))<0.05){
+                if(distance(optimallist.get(i),seedlist.get(j))<Constant.Acc_Thr){
+                    is_within = true;
                     sum = sum + Math.abs((optimallist.get(i).fitnessfun()-seedlist.get(j).fitnessfun()));
                     num++;
                 }
+            }
+            if(!is_within){
+                sum = sum + Math.abs((optimallist.get(i).fitnessfun()-0));
             }
         }
         System.out.println("num = " + num);
