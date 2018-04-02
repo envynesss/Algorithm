@@ -10,6 +10,13 @@ public class baseFA {
 
     public static void main(String[] args) {
         baseSwarm swarm= new baseSwarm();
+        for(int i=0;i<Constant.NumofP;i++){
+            System.out.print("第"+0+" 次");
+            for(int d=0;d<Constant.funDims;d++){
+                System.out.print(" " + swarm.listfirefly.get(i).x[d]);
+            }
+            System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
+        }
         for(int k=0;k<Constant.iterations;k++){
             System.out.println(k+"次*********************************");
             //swarm.addListseed();

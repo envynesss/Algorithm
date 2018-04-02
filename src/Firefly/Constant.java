@@ -19,11 +19,11 @@ class Constant{
     public static double Acc_Thr = 0.1; // Accuracy_Threshold
 
     //Function 参数相关配置
-    public static int codeNum = FunLib.f5_codeNum;
-    public static int funDims = FunLib.f5_Dims;
-    public static double species_rs = FunLib.f5_species_rs;
-    public static double maxRange = FunLib.f5_maxRange;
-    public static double minRange = FunLib.f5_minRange;
+    public static int codeNum = FunLib.f3_codeNum;
+    public static int funDims = FunLib.f3_Dims;
+    public static double species_rs = FunLib.f3_species_rs;
+    public static double maxRange = FunLib.f3_maxRange;
+    public static double minRange = FunLib.f3_minRange;
     public static double[][] optimalpoints = FunLib.f5_optimalpoints;
 
 }
