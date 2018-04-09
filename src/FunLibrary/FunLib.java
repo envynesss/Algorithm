@@ -1,8 +1,5 @@
 package FunLibrary;
 
-
-import java.util.ArrayList;
-
 /**
  * Functions Library for Algorithm
  */

@@ -1,7 +1,5 @@
 package Firefly;
 
-import FunLibrary.FunLib;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,24 +7,21 @@ import java.util.List;
 public class speciesFA {
     public static void main(String[] args) {
         speciesSwarm swarm= new speciesSwarm();
-        for(int k=0;k<Constant.iterations;k++){
+        swarm.addListseed();//生成第一代seed
+        for(int k=1;k<=Constant.iterations;k++){
             System.out.println(k+"次*********************************");
-            swarm.addListseed();
             swarm.classification();
             swarm.move();
-            swarm.speciesList.clear();
             swarm.SortofSwarm();
             for(int i=0;i<Constant.NumofP;i++){
                 System.out.print("第 "+k+"次");
                 for(int d=0;d<Constant.funDims;d++){
-                    System.out.print(" " + swarm.listfirefly.get(i).x[d]);
+                    System.out.print("x[" + d + "] = " + swarm.listfirefly.get(i).x[d] +" pbest "+ swarm.listfirefly.get(i).pbest.x[d]);
                 }
                 System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
             }
-            swarm.seedlist.clear();
-            swarm.addListseed();
+            swarm.addListseed();//更新seed
             swarm.getAccuracy();
-            swarm.seedlist.clear();
         }
     }
 }
@@ -38,7 +33,12 @@ class speciesSwarm{
 
     public speciesSwarm(){
         for(int i=0;i<Constant.NumofP;i++){
-            listfirefly.add(new firefly());
+            firefly fy = new firefly();
+            fy.pbest = new firefly();
+            for(int j=0;j<Constant.funDims;j++){
+                fy.pbest.x[j] = fy.x[j];
+            }
+            listfirefly.add(fy);
         }
     }
 
@@ -52,6 +52,7 @@ class speciesSwarm{
 
     //生成种子集.
     public void addListseed(){
+        seedlist.clear();
         SortofSwarm();
         for(int i=0;i<Constant.NumofP;i++){
             boolean foundseed = true;
@@ -74,6 +75,18 @@ class speciesSwarm{
         System.out.println("seedlist长度为 ："+seedlist.size());
     }
 
+    //更新每个粒子的历史最优值pbest
+    public void addPbestList(){
+        for(int i=0;i<Constant.NumofP;i++){
+            if(listfirefly.get(i).fitnessfun()>listfirefly.get(i).pbest.fitnessfun()){
+                for(int j=0;j<Constant.funDims;j++){
+                    listfirefly.get(i).pbest.x[j] = listfirefly.get(i).x[j];
+                }
+                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            }
+        }
+    }
+
     //按种子给种群分子群
     public void classification(){
 
@@ -86,17 +99,18 @@ class speciesSwarm{
             }
             speciesList.add(species);
         }
-
     }
 
     //粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关。
     public void move(){
+
         listfirefly.clear();
         for(int n=0;n<speciesList.size();n++){
             for(int i=0;i<speciesList.get(n).size();i++){
                 for(int j=0;j<speciesList.get(n).size();j++){
                     if(speciesList.get(n).get(i).light_intensityfun(distance(speciesList.get(n).get(i),speciesList.get(n).get(j)))
                             <speciesList.get(n).get(j).light_intensityfun(distance(speciesList.get(n).get(i),speciesList.get(n).get(j)))){
+
                         for(int d=0;d<Constant.funDims;d++){
                             speciesList.get(n).get(i).x[d]=speciesList.get(n).get(i).x[d]
                                     +speciesList.get(n).get(j).attractivenessfun(distance(speciesList.get(n).get(i),speciesList.get(n).get(j)))
@@ -105,11 +119,14 @@ class speciesSwarm{
                             if(speciesList.get(n).get(i).x[d]>Constant.maxRange) speciesList.get(n).get(i).x[d]=Constant.maxRange;
                             if(speciesList.get(n).get(i).x[d]<Constant.minRange) speciesList.get(n).get(i).x[d]=Constant.minRange;
                         }
+
                     }
                 }
             }
             listfirefly.addAll(speciesList.get(n));
         }
+        speciesList.clear();//speciesList小种群的list,清空以便下一次迭代放入
+        addPbestList();
     }
 
     //对listfirefly进行降序排列。

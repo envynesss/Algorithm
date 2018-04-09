@@ -27,4 +27,3 @@ class Constant{
     public static double[][] optimalpoints = FunLib.f5_optimalpoints;
 
 }
-

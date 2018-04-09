@@ -10,16 +10,9 @@ public class baseFA {
 
     public static void main(String[] args) {
         baseSwarm swarm= new baseSwarm();
-        for(int i=0;i<Constant.NumofP;i++){
-            System.out.print("第"+0+" 次");
-            for(int d=0;d<Constant.funDims;d++){
-                System.out.print(" " + swarm.listfirefly.get(i).x[d]);
-            }
-            System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
-        }
-        for(int k=0;k<Constant.iterations;k++){
+        for(int k=1;k<=Constant.iterations;k++){
             System.out.println(k+"次*********************************");
-            //swarm.addListseed();
+
             swarm.move();
             swarm.SortofSwarm();
 			for(int i=0;i<Constant.NumofP;i++){
@@ -31,7 +24,7 @@ public class baseFA {
 			}
             swarm.addListseed();
             swarm.getAccuracy();
-            swarm.seedlist.clear();
+
         }
     }
 }
@@ -55,6 +48,7 @@ class baseSwarm{
 
     //生成种子集.
     public void addListseed(){
+        seedlist.clear();
         SortofSwarm();
         for(int i=0;i<Constant.NumofP;i++){
             boolean foundseed=true;
@@ -77,7 +71,7 @@ class baseSwarm{
         System.out.println("seedlist长度为："+seedlist.size());
     }
 
-    //粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关。
+    //粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关
     public void move(){
         for(int i=0;i<Constant.NumofP;i++){
             for(int j=0;j<Constant.NumofP;j++){
@@ -96,7 +90,7 @@ class baseSwarm{
         }
     }
 
-    //对listfirefly进行降序排列。
+    //对listfirefly进行降序排列
     public void SortofSwarm(){
         for(int i=0;i<Constant.NumofP;i++){
             listfirefly.get(i).fitnessfun();

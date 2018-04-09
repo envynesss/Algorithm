@@ -2,6 +2,8 @@ package Firefly;
 
 import FunLibrary.FunLib;
 
+import java.util.Arrays;
+
 class firefly implements Comparable{
     double x[];
     int Dims = Constant.funDims;
@@ -9,11 +11,12 @@ class firefly implements Comparable{
     double light_intensity;
     double attractiveness;
     firefly seed;
+    firefly pbest;
 
     public firefly(){
-        x = new double[Dims];
+        this.x = new double[Dims];
         for(int i=0;i<Dims;i++){
-            x[i] = Math.random();//*Constant.maxRange*2-Constant.maxRange;
+            this.x[i] = Math.random();//*Constant.maxRange*2-Constant.maxRange;
         }
         fitnessfun();
     }
@@ -38,6 +41,11 @@ class firefly implements Comparable{
     public double attractivenessfun(double r){
         attractiveness=Constant.beta0*Math.pow(Math.E,-Constant.gamma*Math.pow(r, 2));
         return attractiveness;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(x);
     }
 
     @Override
