@@ -10,16 +10,17 @@ public class speciesFA {
         swarm.addListseed();//生成第一代seed
         for(int k=1;k<=Constant.iterations;k++){
             System.out.println(k+"次*********************************");
+            swarm.CBLSfun();
             swarm.classification();
             swarm.move();
             swarm.SortofSwarm();
-            for(int i=0;i<Constant.NumofP;i++){
+            /*for(int i=0;i<Constant.NumofP;i++){
                 System.out.print("第 "+k+"次");
                 for(int d=0;d<Constant.funDims;d++){
                     System.out.print("x[" + d + "] = " + swarm.listfirefly.get(i).x[d] +" pbest "+ swarm.listfirefly.get(i).pbest.x[d]);
                 }
                 System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
-            }
+            }*/
             swarm.addListseed();//更新seed
             swarm.getAccuracy();
         }
@@ -27,6 +28,7 @@ public class speciesFA {
 }
 
 class speciesSwarm{
+
     List<firefly> listfirefly = new ArrayList();
     List<firefly> seedlist = new ArrayList<>();
     List<List<firefly>> speciesList = new ArrayList<>();
@@ -50,7 +52,9 @@ class speciesSwarm{
         return Math.sqrt(distance);
     }
 
-    //生成种子集.
+    /*
+    生成种子集.
+     */
     public void addListseed(){
         seedlist.clear();
         SortofSwarm();
@@ -75,19 +79,30 @@ class speciesSwarm{
         System.out.println("seedlist长度为 ："+seedlist.size());
     }
 
-    //更新每个粒子的历史最优值pbest
-    public void addPbestList(){
-        for(int i=0;i<Constant.NumofP;i++){
-            if(listfirefly.get(i).fitnessfun()>listfirefly.get(i).pbest.fitnessfun()){
+    /*
+    局域搜索函数CBLS
+     */
+    public void CBLSfun(){
+
+        for(int i=0;i<seedlist.size();i++){
+            double[] xtemp = new double[Constant.funDims];
+            firefly fytemp = new firefly(xtemp);
+            for(int j=0;j<Constant.funDims;j++){
+                xtemp[j] = seedlist.get(i).x[j];
+                xtemp[j] = xtemp[j] + Constant.beta0*(seedlist.get(i).pbest.x[j]-xtemp[j]) + Constant.CBLS_move;
+            }
+            if(fytemp.fitnessfun()>seedlist.get(i).fitnessfun()){
                 for(int j=0;j<Constant.funDims;j++){
-                    listfirefly.get(i).pbest.x[j] = listfirefly.get(i).x[j];
+                    seedlist.get(i).x[j] = xtemp[j];
                 }
-                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                System.out.println("jinzhelilaile");
             }
         }
     }
 
-    //按种子给种群分子群
+    /*
+    按种子给种群分子群
+     */
     public void classification(){
 
         for(int i=0;i<seedlist.size();i++){
@@ -101,7 +116,9 @@ class speciesSwarm{
         }
     }
 
-    //粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关。
+    /*
+    粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关。
+     */
     public void move(){
 
         listfirefly.clear();
@@ -129,7 +146,23 @@ class speciesSwarm{
         addPbestList();
     }
 
-    //对listfirefly进行降序排列。
+    /*
+    更新每个粒子的历史最优值pbest
+     */
+    public void addPbestList(){
+        for(int i=0;i<Constant.NumofP;i++){
+            if(listfirefly.get(i).fitnessfun()>listfirefly.get(i).pbest.fitnessfun()){
+                for(int j=0;j<Constant.funDims;j++){
+                    listfirefly.get(i).pbest.x[j] = listfirefly.get(i).x[j];
+                }
+                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            }
+        }
+    }
+
+    /*
+    对listfirefly进行降序排列。
+     */
     public void SortofSwarm(){
         for(int i=0;i<Constant.NumofP;i++){
             listfirefly.get(i).fitnessfun();

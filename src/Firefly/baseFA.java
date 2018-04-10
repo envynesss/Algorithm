@@ -1,7 +1,5 @@
 package Firefly;
 
-import FunLibrary.FunLib;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +44,9 @@ class baseSwarm{
         return Math.sqrt(distance);
     }
 
-    //生成种子集.
+    /*
+    生成种子集.
+     */
     public void addListseed(){
         seedlist.clear();
         SortofSwarm();
@@ -71,7 +71,9 @@ class baseSwarm{
         System.out.println("seedlist长度为："+seedlist.size());
     }
 
-    //粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关
+    /*
+    粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关
+     */
     public void move(){
         for(int i=0;i<Constant.NumofP;i++){
             for(int j=0;j<Constant.NumofP;j++){
@@ -90,13 +92,16 @@ class baseSwarm{
         }
     }
 
-    //对listfirefly进行降序排列
+    /*
+    对listfirefly进行降序排列
+     */
     public void SortofSwarm(){
         for(int i=0;i<Constant.NumofP;i++){
             listfirefly.get(i).fitnessfun();
         }
         Collections.sort(listfirefly);
     }
+
     /**
      * 计算算法精确值函数
      */
