@@ -6,26 +6,29 @@ import java.util.List;
 
 public class test{
     public static void main(String[] args){
-        ArrayList<point> list = new ArrayList<>();
-        ArrayList<List<point>> list2 = new ArrayList<>();
-        point p = new point(new int[]{1,2});
-        p.pbest = new point(new int[]{3,4});
-        p.pbest.x[0] = p.x[0];
-        p.pbest.x[1] = p.x[1];
-        System.out.println(Arrays.toString(p.x));
-        System.out.println(Arrays.toString(p.pbest.x));
-        p.x[0] = 100;
-        p.x[1] = 200;
-        System.out.println(Arrays.toString(p.x));
-        System.out.println(Arrays.toString(p.pbest.x));
-    }
-}
+        double[] x0 = {0.25};// 200.0
+        /*double[] x1 = {-2.805118,3.131312};// 199.999999999989
+        double[] x2 = {-3.779310,-3.283186};// 199.99999999999622
+        double[] x3 = {3.584428,-1.848126};// 199.9999999999911
+*/
 
-class point{
-    int x[];
-    point pbest;
-    public point(int x[]){
-        this.x = x;
+        fun(x0);
+    }
+
+    public static void fun(double[] x) {
+        double fitness = 0;
+        fitness = Math.pow(Math.sin(5*Math.PI*(Math.pow(x[0],0.75)-0.05)),6);
+        System.out.println(fitness);
+    }
+
+    public static void fun2(double[] x) {
+
     }
 
 }
+
+class point {
+    double[] x;
+    double fitness;
+}
+

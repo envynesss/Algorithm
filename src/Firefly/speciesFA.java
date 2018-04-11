@@ -9,18 +9,18 @@ public class speciesFA {
         speciesSwarm swarm= new speciesSwarm();
         swarm.addListseed();//生成第一代seed
         for(int k=1;k<=Constant.iterations;k++){
-            System.out.println(k+"次*********************************");
+            System.out.println("****************"+ k +"次****************");
             swarm.CBLSfun();
             swarm.classification();
             swarm.move();
             swarm.SortofSwarm();
-            /*for(int i=0;i<Constant.NumofP;i++){
-                System.out.print("第 "+k+"次");
+            for(int i=0;i<Constant.NumofP;i++){
+                System.out.print("第 "+k+"次 ");
                 for(int d=0;d<Constant.funDims;d++){
-                    System.out.print("x[" + d + "] = " + swarm.listfirefly.get(i).x[d] +" pbest "+ swarm.listfirefly.get(i).pbest.x[d]);
+                    System.out.print("x[" + d + "] = " + swarm.listfirefly.get(i).x[d] +" ");
                 }
                 System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
-            }*/
+            }
             swarm.addListseed();//更新seed
             swarm.getAccuracy();
         }
@@ -95,7 +95,7 @@ class speciesSwarm{
                 for(int j=0;j<Constant.funDims;j++){
                     seedlist.get(i).x[j] = xtemp[j];
                 }
-                System.out.println("jinzhelilaile");
+                System.out.println("Enter the CBLS() 函数 ");
             }
         }
     }
@@ -155,7 +155,6 @@ class speciesSwarm{
                 for(int j=0;j<Constant.funDims;j++){
                     listfirefly.get(i).pbest.x[j] = listfirefly.get(i).x[j];
                 }
-                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             }
         }
     }

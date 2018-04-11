@@ -17,7 +17,7 @@ class firefly implements Comparable{
         this.x = new double[Dims];
         for(int i=0;i<Dims;i++){
             //this.x[i] = Math.random()*Constant.maxRange*2-Constant.maxRange;
-            this.x[i] = Math.random(); //f3 and f5 正弦函数
+            this.x[i] = Math.random(); //f1 and f2 正弦函数
         }
         fitnessfun();
     }

@@ -13,13 +13,13 @@ public class baseFA {
 
             swarm.move();
             swarm.SortofSwarm();
-			for(int i=0;i<Constant.NumofP;i++){
+			/*for(int i=0;i<Constant.NumofP;i++){
 				System.out.print("第"+k+" 次");
 				for(int d=0;d<Constant.funDims;d++){
 					System.out.print(" " + swarm.listfirefly.get(i).x[d]);
 				}
 				System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
-			}
+			}*/
             swarm.addListseed();
             swarm.getAccuracy();
 
