@@ -4,7 +4,8 @@ import FunLibrary.FunLib;
 
 import java.util.Arrays;
 
-class firefly implements Comparable{
+public class firefly implements Comparable{
+    int bianhao;
     double x[];
     int Dims = Constant.funDims;
     double fitness;
@@ -16,8 +17,8 @@ class firefly implements Comparable{
     public firefly(){
         this.x = new double[Dims];
         for(int i=0;i<Dims;i++){
-            //this.x[i] = Math.random()*Constant.maxRange*2-Constant.maxRange;
-            this.x[i] = Math.random(); //f1 and f2 正弦函数
+            this.x[i] = Math.random()*Constant.maxRange*2-Constant.maxRange;
+            //this.x[i] = Math.random(); //f1 and f2 正弦函数
         }
         fitnessfun();
     }
@@ -28,7 +29,7 @@ class firefly implements Comparable{
     }
 
     public double fitnessfun(){
-        fitness = FunLib.funLib(x,Constant.codeNum);
+        fitness = FunLib.funLib(x, Constant.codeNum);
         return fitness;
     }
 
@@ -36,7 +37,7 @@ class firefly implements Comparable{
     相对亮度函数,粒子的亮度取决于粒子本身函数值大小和距离.两个粒子的相对亮度可以不同
      */
     public double light_intensityfun(double r){
-        light_intensity=fitness*Math.pow(Math.E,-Constant.gamma*Math.pow(r, 2));
+        light_intensity = fitness * Math.pow(Math.E, -Constant.gamma * Math.pow(r, 2));
         return light_intensity;
     }
 

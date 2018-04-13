@@ -8,7 +8,7 @@ public class FunLib {
     //f1 function related data
     public static int f1_codeNum = 1; //Function code number
     public static int f1_Dims = 1; //Function dimension
-    public static double f1_species_rs = 0.15; //Function species radius
+    public static double f1_species_rs = 0.1; //Function species radius
     public static double f1_maxRange = 1; //Function max Range
     public static double f1_minRange = 0; //Function min Range
     public static double[] f1_gpoint_1 = {0.1}; // 1
@@ -21,7 +21,7 @@ public class FunLib {
     //f2 function related data
     public static int f2_codeNum = 2; //Function code number
     public static int f2_Dims = 1; //Function dimension
-    public static double f2_species_rs = 0.15; //Function species radius
+    public static double f2_species_rs = 0.1; //Function species radius
     public static double f2_maxRange = 1; //Function max Range
     public static double f2_minRange = 0; //Function min Range
     public static double[] f2_gpoint_1 = {0.07969966213537202}; // :0.9999999998929217
@@ -52,7 +52,7 @@ public class FunLib {
     //f7 function related data
     public static int f7_codeNum = 7; //Function code number
     public static int f7_Dims = 1; //Function dimension
-    public static double f7_species_rs = 0.15; //Function species radius
+    public static double f7_species_rs = 0.1; //Function species radius
     public static double f7_maxRange = 1; //Function max Range
     public static double f7_minRange = 0; //Function min Range
     public static double[] f7_gpoint_1 = {0.1}; //1.0
@@ -69,11 +69,11 @@ public class FunLib {
     public static double f8_maxRange = 1; //Function max Range
     public static double f8_minRange = 0; //Function min Range
     public static double[] f8_gpoint_1 = {0.07969966213537202}; // :0.9999999998929217
-    public static double[] f8_gpoint_2 = {0.24665546669843014}; // 0.9999999999998974
-    public static double[] f8_gpoint_3 = {0.45062670094296264}; // 0.9999999999999973
-    public static double[] f8_gpoint_4 = {0.6814202178683114}; // 0.99999999999999
-    public static double[] f8_gpoint_5 = {0.9338951689306259}; // 0.9999999999997322
-    public static double[][] f8_optimalpoints = {f8_gpoint_1,f8_gpoint_2,f8_gpoint_3,f8_gpoint_4,f8_gpoint_5};
+    public static double[] f8_lpoint_2 = {0.24665546669843014}; // 0.9999999999998974
+    public static double[] f8_lpoint_3 = {0.45062670094296264}; // 0.9999999999999973
+    public static double[] f8_lpoint_4 = {0.6814202178683114}; // 0.99999999999999
+    public static double[] f8_lpoint_5 = {0.9338951689306259}; // 0.9999999999997322
+    public static double[][] f8_optimalpoints = {f8_gpoint_1,f8_lpoint_2,f8_lpoint_3,f8_lpoint_4,f8_lpoint_5};
 
     //f9 function related data
     public static int f9_codeNum = 9; //Function code number

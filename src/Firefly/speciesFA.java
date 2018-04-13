@@ -9,18 +9,18 @@ public class speciesFA {
         speciesSwarm swarm= new speciesSwarm();
         swarm.addListseed();//生成第一代seed
         for(int k=1;k<=Constant.iterations;k++){
-            System.out.println("****************"+ k +"次****************");
-            swarm.CBLSfun();
+            System.out.println("****************"+ k +" time****************");
+            swarm.CBLS_RWDE_fun();
             swarm.classification();
             swarm.move();
             swarm.SortofSwarm();
-            for(int i=0;i<Constant.NumofP;i++){
+            /*for(int i=0;i<Constant.NumofP;i++){
                 System.out.print("第 "+k+"次 ");
                 for(int d=0;d<Constant.funDims;d++){
                     System.out.print("x[" + d + "] = " + swarm.listfirefly.get(i).x[d] +" ");
                 }
                 System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
-            }
+            }*/
             swarm.addListseed();//更新seed
             swarm.getAccuracy();
         }
@@ -36,6 +36,7 @@ class speciesSwarm{
     public speciesSwarm(){
         for(int i=0;i<Constant.NumofP;i++){
             firefly fy = new firefly();
+            fy.bianhao = i;
             fy.pbest = new firefly();
             for(int j=0;j<Constant.funDims;j++){
                 fy.pbest.x[j] = fy.x[j];
@@ -72,32 +73,61 @@ class speciesSwarm{
                 listfirefly.get(i).seed = listfirefly.get(i);
             }
         }
+        System.out.print("seedlist length:"+seedlist.size()+ " seeds：");
         for(int i=0;i<seedlist.size();i++){
-            System.out.print(seedlist.get(i).fitnessfun()+" ");
+            System.out.print( "#" + seedlist.get(i).bianhao + " " + seedlist.get(i).fitnessfun() + ", ");
         }
         System.out.println();
-        System.out.println("seedlist长度为 ："+seedlist.size());
     }
 
     /*
-    局域搜索函数CBLS
+    局域搜索函数 CBLS Step 和 RWDE Step
      */
-    public void CBLSfun(){
+    public void CBLS_RWDE_fun() {
 
-        for(int i=0;i<seedlist.size();i++){
-            double[] xtemp = new double[Constant.funDims];
-            firefly fytemp = new firefly(xtemp);
-            for(int j=0;j<Constant.funDims;j++){
-                xtemp[j] = seedlist.get(i).x[j];
-                xtemp[j] = xtemp[j] + Constant.beta0*(seedlist.get(i).pbest.x[j]-xtemp[j]) + Constant.CBLS_move;
-            }
-            if(fytemp.fitnessfun()>seedlist.get(i).fitnessfun()){
-                for(int j=0;j<Constant.funDims;j++){
-                    seedlist.get(i).x[j] = xtemp[j];
+        for (int i = 0; i < seedlist.size(); i++) {
+            System.out.println(i + " p...pbest...distance " + "#" + seedlist.get(i).bianhao + "..." + distance(seedlist.get(i), seedlist.get(i).pbest));
+            double random = Math.random();
+            if (random < 1.0) {
+                double Lambda = 1.0;
+                double[] xtemp = new double[Constant.funDims];
+                firefly fytemp = new firefly(xtemp);
+                if (distance(seedlist.get(i), seedlist.get(i).pbest) < 1.1e-6) {
+                    //RWDE Step
+                    System.out.println("#" + seedlist.get(i).bianhao + " Enter the RWDE Step out");
+                    for (int index = 0; index < Constant.CBLS_step; index++) {
+                        for(int j=0;j<Constant.funDims;j++){
+                            xtemp[j] = seedlist.get(i).x[j];
+                            xtemp[j] = xtemp[j] + Lambda * Constant.CBLS_move;
+                        }
+                        if(fytemp.fitnessfun()>seedlist.get(i).fitnessfun()){
+                            for(int j=0;j<Constant.funDims;j++){
+                                seedlist.get(i).x[j] = xtemp[j];
+                            }
+                            System.out.println("#" + seedlist.get(i).bianhao + " Enter the RWDE Step in");
+                        }else {
+                            Lambda = Lambda * 0.5;
+                        }
+                    }
+                } else {
+                    //CBLS Step
+                    System.out.println("#" + seedlist.get(i).bianhao + " Enter the CBLS Step out");
+                    for (int index = 0; index < Constant.CBLS_step; index++) {
+                        for(int j = 0; j < Constant.funDims; j++) {
+                            xtemp[j] = seedlist.get(i).x[j];
+                            xtemp[j] = xtemp[j] + Constant.beta0 * (seedlist.get(i).pbest.x[j] - xtemp[j]) + Constant.CBLS_move;
+                        }
+                        if (fytemp.fitnessfun()>seedlist.get(i).fitnessfun()) {
+                            for(int j = 0; j < Constant.funDims; j++) {
+                                seedlist.get(i).x[j] = xtemp[j];
+                            }
+                            System.out.println("#" + seedlist.get(i).bianhao + " Enter the CBLS Step in");
+                        }
+                    }
                 }
-                System.out.println("Enter the CBLS() 函数 ");
             }
         }
+        addPbestList();
     }
 
     /*
@@ -120,7 +150,6 @@ class speciesSwarm{
     粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关。
      */
     public void move(){
-
         listfirefly.clear();
         for(int n=0;n<speciesList.size();n++){
             for(int i=0;i<speciesList.get(n).size();i++){
@@ -136,14 +165,14 @@ class speciesSwarm{
                             if(speciesList.get(n).get(i).x[d]>Constant.maxRange) speciesList.get(n).get(i).x[d]=Constant.maxRange;
                             if(speciesList.get(n).get(i).x[d]<Constant.minRange) speciesList.get(n).get(i).x[d]=Constant.minRange;
                         }
-
+                        speciesList.get(n).get(i).fitnessfun();
                     }
                 }
             }
             listfirefly.addAll(speciesList.get(n));
         }
         speciesList.clear();//speciesList小种群的list,清空以便下一次迭代放入
-        addPbestList();
+        //addPbestList();
     }
 
     /*
@@ -151,10 +180,12 @@ class speciesSwarm{
      */
     public void addPbestList(){
         for(int i=0;i<Constant.NumofP;i++){
-            if(listfirefly.get(i).fitnessfun()>listfirefly.get(i).pbest.fitnessfun()){
-                for(int j=0;j<Constant.funDims;j++){
+            //System.out.println("addPbestList() out");
+            if(listfirefly.get(i).fitnessfun() > listfirefly.get(i).pbest.fitnessfun()) {
+                for(int j = 0; j < Constant.funDims; j++) {
                     listfirefly.get(i).pbest.x[j] = listfirefly.get(i).x[j];
                 }
+                //System.out.println("addPbestList() in #" + listfirefly.get(i).bianhao);
             }
         }
     }
@@ -178,24 +209,24 @@ class speciesSwarm{
             optimallist.add(new firefly(Constant.optimalpoints[m]));
         }
         int numofoptimal = optimallist.size();
-        double accuracy = 1.0/numofoptimal;
+        double accuracy = 1.0 / numofoptimal;
         double sum = 0;
-        int num =0;
-        for(int i=0;i<numofoptimal;i++){
+        int num = 0;
+        for (int i = 0; i < numofoptimal; i++) {
             boolean is_within = false;
-            for(int j=0;j<seedlist.size();j++){
-                if(distance(optimallist.get(i),seedlist.get(j))<Constant.Acc_Thr){
+            for(int j = 0; j < seedlist.size(); j++){
+                if(distance(optimallist.get(i), seedlist.get(j)) < Constant.Acc_Thr) {
                     is_within = true;
-                    sum = sum + Math.abs((optimallist.get(i).fitnessfun()-seedlist.get(j).fitnessfun()));
+                    sum = sum + Math.abs((optimallist.get(i).fitnessfun() - seedlist.get(j).fitnessfun()));
                     num++;
                 }
             }
-            if(!is_within){
-                sum = sum + Math.abs((optimallist.get(i).fitnessfun()-0));
+            if (!is_within) {
+                sum = sum + Math.abs((optimallist.get(i).fitnessfun() - 0));
             }
         }
-        System.out.println("num = " + num);
+        System.out.print("num = " + num);
         accuracy = accuracy * sum;
-        System.out.println("accurary = "+accuracy);
+        System.out.println(" accurary = " + accuracy);
     }
 }
