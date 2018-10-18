@@ -5,9 +5,12 @@ import FunLibrary.FunLib;
 import java.util.Arrays;
 
 public class firefly implements Comparable{
-    int bianhao;
+    static int Dims = Constant.funDims;
+
+    int number;
+    boolean isProcessed = false;
+
     double x[];
-    int Dims = Constant.funDims;
     double fitness;
     double light_intensity;
     double attractiveness;
@@ -16,9 +19,14 @@ public class firefly implements Comparable{
 
     public firefly(){
         this.x = new double[Dims];
-        for(int i=0;i<Dims;i++){
-            this.x[i] = Math.random()*Constant.maxRange*2-Constant.maxRange;
-            //this.x[i] = Math.random(); //f1 and f2 正弦函数
+        if (Constant.codeNum == 1 || Constant.codeNum == 2) {
+            for(int i=0;i<Dims;i++){
+                this.x[i] = Math.random(); //f1 and f2 正弦函数
+            }
+        } else {
+            for(int i=0;i<Dims;i++){
+                this.x[i] = Math.random()*Constant.maxRange*2-Constant.maxRange;
+            }
         }
         fitnessfun();
     }
