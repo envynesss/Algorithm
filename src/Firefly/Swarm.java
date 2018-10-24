@@ -38,12 +38,11 @@ public class Swarm {
                 fireflyList.get(i).seed = fireflyList.get(i);
             }
         }
-        System.out.println("seedList长度为：" + seedList.size());
+        /*System.out.println("seedList长度为：" + seedList.size());
         for(int i = 0; i < seedList.size(); i++){
             System.out.print( "#" + seedList.get(i).number + ":" + seedList.get(i).fitnessfun() + ",");
         }
-        System.out.println();
-
+        System.out.println();*/
     }
 
     /*
@@ -58,9 +57,9 @@ public class Swarm {
                         fireflyList.get(i).x[d] = fireflyList.get(i).x[d]
                                 + fireflyList.get(j).attractivenessfun(distance(fireflyList.get(i), fireflyList.get(j)))
                                 * (fireflyList.get(j).x[d] - fireflyList.get(i).x[d])
-                                + Constant.alpha * (Math.random() - 0.5);
-                        if(fireflyList.get(i).x[d] > Constant.maxRange) fireflyList.get(i).x[d] = Constant.maxRange;
-                        if(fireflyList.get(i).x[d] < Constant.minRange) fireflyList.get(i).x[d] = Constant.minRange;
+                                + Constant.alpha * (Constant.getGaussian() - 0.5);
+                        if(fireflyList.get(i).x[d] > Constant.maxRange[d]) fireflyList.get(i).x[d] = Constant.maxRange[d];
+                        if(fireflyList.get(i).x[d] < Constant.minRange[d]) fireflyList.get(i).x[d] = Constant.minRange[d];
                     }
                 }
             }
@@ -91,7 +90,7 @@ public class Swarm {
     /**
      * 计算算法精确值函数
      */
-    public void getAccuracy(){
+    public double getAccuracy(){
         List<firefly> optimalList = new ArrayList<>();
         for(int m = 0; m < Constant.optimalpoints.length; m++){
             optimalList.add(new firefly(Constant.optimalpoints[m]));
@@ -113,8 +112,9 @@ public class Swarm {
                 sum = sum + Math.abs((optimalList.get(i).fitnessfun() - 0));
             }
         }
-        System.out.println("num = " + num);
+        System.out.println("optimal found number = " + num);
         accuracy = accuracy * sum;
         System.out.println("accurary = " + accuracy);
+        return accuracy;
     }
 }

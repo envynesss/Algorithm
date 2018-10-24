@@ -19,13 +19,18 @@ public class firefly implements Comparable{
 
     public firefly(){
         this.x = new double[Dims];
-        if (Constant.codeNum == 1 || Constant.codeNum == 2) {
-            for(int i=0;i<Dims;i++){
+        if (Constant.codeNum == 1 || Constant.codeNum == 2 || Constant.codeNum == 7 || Constant.codeNum == 8) {
+            for(int i = 0; i < Dims; i++){
                 this.x[i] = Math.random(); //f1 and f2 正弦函数
             }
-        } else {
-            for(int i=0;i<Dims;i++){
-                this.x[i] = Math.random()*Constant.maxRange*2-Constant.maxRange;
+        }
+        else if (Constant.codeNum == 4) {
+            this.x[0] = Math.random() * 15 + (-5);
+            this.x[1] = Math.random() * 15;
+        }
+        else {
+            for(int i = 0; i < Dims; i++){
+                this.x[i] = Math.random() * Constant.maxRange[i] * 2 - Constant.maxRange[i];
             }
         }
         fitnessfun();

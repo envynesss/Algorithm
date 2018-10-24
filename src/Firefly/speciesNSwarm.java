@@ -3,12 +3,15 @@ package Firefly;
 import java.util.ArrayList;
 import java.util.List;
 
-public class speciesSwarm_number extends speciesSwarm{
+public class speciesNSwarm extends speciesSwarm{
     @Override
     public void setSeedList() {
         seedList.clear();
-        int rs = 3;
-        int unprocessed_num = Constant.NumofP;
+        int rs = 4;
+        int unprocessed_num = fireflyList.size();
+        for (int i = 0; i < fireflyList.size(); i++) {
+            fireflyList.get(i).isProcessed = false;
+        }
         while(unprocessed_num > 0){
             boolean foundseed = true;
             firefly best_firefly = best_firefly(fireflyList);
@@ -17,16 +20,14 @@ public class speciesSwarm_number extends speciesSwarm{
                     best_firefly.x = new firefly().x;
                     best_firefly.fitnessfun();
                     best_firefly.isProcessed = true;
-                    //System.out.println("processed " + best_firefly.bianhao);
                     unprocessed_num--;
-                    foundseed=false;
+                    foundseed = false;
                     break;
                 }
             }
             if(foundseed){
                 seedList.add(best_firefly);
                 int k = best_firefly.number;
-                //System.out.println(k);
                 List<Integer> neibor_num_list;
                 neibor_num_list = Constant.get_neibor_num_list(Constant.NumofP, k, rs);
                 for (int i = 0; i < neibor_num_list.size(); i++) {
@@ -35,18 +36,16 @@ public class speciesSwarm_number extends speciesSwarm{
                             fireflyList.get(j).seed = best_firefly;
                             fireflyList.get(j).isProcessed = true;
                             unprocessed_num--;
-                            //System.out.print(neibor_num_list.get(i) + ",");
                         }
                     }
                 }
-                //System.out.println();
             }
         }
-        System.out.print("seedlist length:"+seedList.size()+ " seeds：");
+        /*System.out.print("seedlist length:"+seedList.size()+ " seeds：");
         for(int i = 0; i < seedList.size(); i++){
             System.out.print( "#" + seedList.get(i).number + " " + seedList.get(i).fitnessfun() + ", ");
         }
-        System.out.println();
+        System.out.println();*/
     }
 
     public firefly best_firefly(List<firefly> listfirefly) {

@@ -2,73 +2,68 @@ package Firefly;
 
 public class Main {
     public static void main(String[] args) {
-        //runBaseSwarm();
-        //runSpeciesSwarm();
-        runSpeciesSwarm_number();
+        int times = 10;
+        double[] array = new double[times];
+
+        /*for (int i = 0; i < times; i++) {
+            array[i] = runBaseSwarm();
+        }
+        System.out.println("\n独立运行" + times + "次后 accurary 平均值为：" + Constant.average(array));*/
+
+        for (int i = 0; i < times; i++) {
+            array[i] = runSpeciesSwarm();
+        }
+
+        System.out.println("\n独立运行" + times + "次后accurary平均值为：" + Constant.average(array));
+
+        /*for (int i = 0; i < times; i++) {
+            array[i] = runSpeciesSwarm_number();
+        }
+        System.out.println("\n独立运行" + times + "次后accurary平均值为：" + Constant.average(array));*/
     }
 
-    public static void runBaseSwarm(){
+    public static double runBaseSwarm(){
         baseSwarm swarm = new baseSwarm();
         for(int k = 1; k <= Constant.iterations; k++){
-            System.out.println(k + "次*********************************");
-
+            //System.out.println(k + "次*********************************");
             swarm.move();
             swarm.sortSwarm();
-			/*for(int i=0;i<Constant.NumofP;i++){
-				System.out.print("第"+k+" 次");
-				for(int d=0;d<Constant.funDims;d++){
-					System.out.print(" " + swarm.listfirefly.get(i).x[d]);
+			/*for(int i = 0; i < Constant.NumofP; i++){
+				System.out.print("第" + k + " 次");
+				for(int d = 0; d < Constant.funDims; d++){
+					System.out.print(" " + swarm.fireflyList.get(i).x[d]);
 				}
-				System.out.println(" fitness:" + swarm.listfirefly.get(i).fitnessfun());
+				System.out.println(" fitness:" + swarm.fireflyList.get(i).fitnessfun());
 			}*/
             swarm.setSeedList();
-            swarm.getAccuracy();
         }
+        return swarm.getAccuracy();
     }
 
-    public static void runSpeciesSwarm() {
+    public static double runSpeciesSwarm() {
         speciesSwarm swarm= new speciesSwarm();
-        swarm.setSeedList();//生成第一代seed
+        swarm.setSeedList();
         for(int k = 1; k <= Constant.iterations; k++){
-            System.out.println("****************"+ k +" time****************");
-            swarm.CBLS_RWDE_fun();
+            //swarm.CBLS_RWDE_fun();
             swarm.classification();
             swarm.move();
-            swarm.sortSwarm();
-            System.out.println(swarm.fireflyList.size());
-            for(int i = 0; i < Constant.NumofP; i++){
-                System.out.println(i);
-                System.out.print("第 "+k+"次 ");
-                for(int d = 0; d < Constant.funDims; d++){
-                    System.out.print("x[" + d + "] = " + swarm.fireflyList.get(i).x[d] +" ");
-                }
-                System.out.println(" fitness:" + swarm.fireflyList.get(i).fitnessfun());
-            }
-            swarm.setSeedList();//更新seed
-            swarm.getAccuracy();
+            swarm.setSeedList();
         }
+        for (int i = 0; i < swarm.seedList.size(); i++) {
+            System.out.println(swarm.seedList.get(i));
+        }
+        return swarm.getAccuracy();
     }
 
-    public static void runSpeciesSwarm_number() {
-        speciesSwarm_number swarm= new speciesSwarm_number();
-        swarm.setSeedList();//生成第一代seed
+    public static double runSpeciesSwarm_number(){
+        speciesNSwarm swarm= new speciesNSwarm();
+        swarm.setSeedList();
         for(int k = 1; k <= Constant.iterations; k++){
-            System.out.println("****************"+ k +" time****************");
-            swarm.CBLS_RWDE_fun();
+            //swarm.CBLS_RWDE_fun();
             swarm.classification();
             swarm.move();
-            swarm.sortSwarm();
-            System.out.println(swarm.fireflyList.size());
-            for(int i = 0; i < Constant.NumofP; i++){
-                System.out.println(i);
-                System.out.print("第 "+k+"次 ");
-                for(int d = 0; d < Constant.funDims; d++){
-                    System.out.print("x[" + d + "] = " + swarm.fireflyList.get(i).x[d] +" ");
-                }
-                System.out.println(" fitness:" + swarm.fireflyList.get(i).fitnessfun());
-            }
-            swarm.setSeedList();//更新seed
-            swarm.getAccuracy();
+            swarm.setSeedList();
         }
+        return swarm.getAccuracy();
     }
 }

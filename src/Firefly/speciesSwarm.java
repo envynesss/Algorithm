@@ -3,7 +3,6 @@ package Firefly;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class speciesSwarm extends Swarm{
 
     @Override
@@ -16,7 +15,7 @@ public class speciesSwarm extends Swarm{
      */
     @Override
     public void move(){
-        fireflyList.clear();
+        //fireflyList.clear();
         for(int n = 0; n < speciesList.size(); n++){
             for(int i = 0; i < speciesList.get(n).size(); i++){
                 for(int j = 0; j < speciesList.get(n).size(); j++){
@@ -28,17 +27,16 @@ public class speciesSwarm extends Swarm{
                                     + speciesList.get(n).get(j).attractivenessfun(distance(speciesList.get(n).get(i), speciesList.get(n).get(j)))
                                     * (speciesList.get(n).get(j).x[d] - speciesList.get(n).get(i).x[d])
                                     + Constant.alpha * (Math.random()-0.5);
-                            if(speciesList.get(n).get(i).x[d] > Constant.maxRange) speciesList.get(n).get(i).x[d] = Constant.maxRange;
-                            if(speciesList.get(n).get(i).x[d] < Constant.minRange) speciesList.get(n).get(i).x[d] = Constant.minRange;
+                            if(speciesList.get(n).get(i).x[d] > Constant.maxRange[d]) speciesList.get(n).get(i).x[d] = Constant.maxRange[d];
+                            if(speciesList.get(n).get(i).x[d] < Constant.minRange[d]) speciesList.get(n).get(i).x[d] = Constant.minRange[d];
                         }
                         speciesList.get(n).get(i).fitnessfun();
                     }
                 }
             }
-            fireflyList.addAll(speciesList.get(n));
+            //fireflyList.addAll(speciesList.get(n));
         }
         speciesList.clear();//speciesList小种群的list,清空以便下一次迭代放入
-        //addPbestList();
     }
 
     /*
@@ -55,7 +53,7 @@ public class speciesSwarm extends Swarm{
                 firefly fytemp = new firefly(xtemp);
                 if (distance(seedList.get(i), seedList.get(i).pbest) < 1.1e-6) {
                     //RWDE Step
-                    System.out.println("#" + seedList.get(i).number + " Enter the RWDE Step out");
+                    //System.out.println("#" + seedList.get(i).number + " Enter the RWDE Step out");
                     for (int index = 0; index < Constant.CBLS_step; index++) {
                         for(int j = 0; j < Constant.funDims; j++){
                             xtemp[j] = seedList.get(i).x[j];
@@ -65,14 +63,14 @@ public class speciesSwarm extends Swarm{
                             for(int j = 0; j < Constant.funDims; j++){
                                 seedList.get(i).x[j] = xtemp[j];
                             }
-                            System.out.println("#" + seedList.get(i).number + " Enter the RWDE Step in");
+                            //System.out.println("#" + seedList.get(i).number + " Enter the RWDE Step in");
                         }else {
                             Lambda = Lambda * 0.5;
                         }
                     }
                 } else {
                     //CBLS Step
-                    System.out.println("#" + seedList.get(i).number + " Enter the CBLS Step out");
+                    //System.out.println("#" + seedList.get(i).number + " Enter the CBLS Step out");
                     for (int index = 0; index < Constant.CBLS_step; index++) {
                         for(int j = 0; j < Constant.funDims; j++) {
                             xtemp[j] = seedList.get(i).x[j];
@@ -82,7 +80,7 @@ public class speciesSwarm extends Swarm{
                             for(int j = 0; j < Constant.funDims; j++) {
                                 seedList.get(i).x[j] = xtemp[j];
                             }
-                            System.out.println("#" + seedList.get(i).number + " Enter the CBLS Step in");
+                            //System.out.println("#" + seedList.get(i).number + " Enter the CBLS Step in");
                         }
                     }
                 }
@@ -113,7 +111,7 @@ public class speciesSwarm extends Swarm{
 
         for(int i = 0; i < seedList.size(); i++){
             List<firefly> species = new ArrayList<>();
-            for(int j=0;j<fireflyList.size();j++){
+            for(int j = 0; j < fireflyList.size(); j++){
                 if(fireflyList.get(j).seed != null && fireflyList.get(j).seed.equals(seedList.get(i))){
                     species.add(fireflyList.get(j));
                 }

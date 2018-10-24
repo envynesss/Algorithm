@@ -1,5 +1,3 @@
 package Firefly;
 
-public class baseSwarm extends Swarm{
-
-}
+public class baseSwarm extends Swarm{}
