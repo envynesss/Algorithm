@@ -1,7 +1,7 @@
 package Firefly;
 
-import FunLibrary.FunLib;
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -15,26 +15,44 @@ public class Constant{
     //β0
     public static final double beta0=0.1;
     //α为Step factor步长因子属于[0,1]
-    public static final double alpha=0.01;
+    //public static double alpha=0.001; // 函数中配置
 
-    public static int iterations = 30000;
-    public static double Acc_Thr = 0.0001; // Accuracy_Threshold
-
+    public static int iterations = 30000; //迭代次数
+    public static int runTimes = 30; //独立运行次数
     public static int CBLS_step = 5; //局域搜索的探索次数
     public static double CBLS_move = 0.00000001; //局域搜索的移动距离
-
     public static int RWDE_step = 5; //局域搜索的探索次数
     public static double RWDE_move = 0.00000001; //局域搜索的移动距离
 
+    //函数相关参数
+    public static int codeNum;
+    public static int funDims;
+    public static double species_rs;
+    public static double[] maxRange;
+    public static double[] minRange;
+    public static double[][] optimalpoints;
+    public static double[][] gpoints;
+    public static double alpha;
+    public static double Acc_Thr;
 
-    //Function 参数相关配置
-    static FunLib.f9 fun = new FunLib.f9();
-    public static int codeNum = fun.codeNum;
-    public static int funDims = fun.Dims;
-    public static double species_rs = fun.species_rs;
-    public static double[] maxRange = fun.maxRange;
-    public static double[] minRange = fun.minRange;
-    public static double[][] optimalpoints = fun.optimalpoints;
+    //输出文件路径
+    public static String filePath = "data.txt";
+
+    /*
+    Function 函数相关参数社设置
+     */
+    public static void setFuncPara(int code_Num, int fun_Dims, double species_Rs, double[] max_Range, double[] min_Range,
+                                   double[][] optimal_points, double[][] g_points, double Alpha, double acc_Thr) {
+        Constant.codeNum = code_Num;
+        Constant.funDims = fun_Dims;
+        Constant.species_rs = species_Rs;
+        Constant.maxRange = max_Range;
+        Constant.minRange = min_Range;
+        Constant.optimalpoints = optimal_points;
+        Constant.gpoints = g_points;
+        Constant.alpha = Alpha;
+        Constant.Acc_Thr = acc_Thr;
+    }
 
     /*
     取到环形邻域结构的seed的邻域
@@ -97,5 +115,17 @@ public class Constant{
     public static double getGaussian(){
         Random r = new Random();
         return r.nextGaussian();
+    }
+
+    public static void fileChaseFW(String filePath, String content) {
+        try {
+            //构造函数中的第二个参数true表示以追加形式写文件
+            FileWriter fw = new FileWriter(filePath,true);
+            fw.write(content);
+            fw.write('\n');
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("文件写入失败！" + e);
+        }
     }
 }

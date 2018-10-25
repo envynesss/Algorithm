@@ -91,30 +91,53 @@ public class Swarm {
      * 计算算法精确值函数
      */
     public double getAccuracy(){
-        List<firefly> optimalList = new ArrayList<>();
-        for(int m = 0; m < Constant.optimalpoints.length; m++){
-            optimalList.add(new firefly(Constant.optimalpoints[m]));
+        List<firefly> gPointList = new ArrayList<>();
+        for(int m = 0; m < Constant.gpoints.length; m++){
+            gPointList.add(new firefly(Constant.gpoints[m]));
         }
-        int numOptimal = optimalList.size();
-        double accuracy = 1.0 / numOptimal;
+        int gPointSize = gPointList.size();
+        double accuracy = 1.0 / gPointSize;
         double sum = 0;
-        int num = 0;
-        for(int i = 0;i < numOptimal; i++){
+        int gPointNumber = 0;
+        for(int i = 0;i < gPointSize; i++){
             boolean is_within = false;
             for(int j = 0;j < seedList.size(); j++){
-                if(distance(optimalList.get(i), seedList.get(j)) < Constant.Acc_Thr){
+                if(distance(gPointList.get(i), seedList.get(j)) < Constant.Acc_Thr){
                     is_within = true;
-                    sum = sum + Math.abs((optimalList.get(i).fitnessfun() - seedList.get(j).fitnessfun()));
-                    num++;
+                    sum = sum + Math.abs((gPointList.get(i).fitnessfun() - seedList.get(j).fitnessfun()));
+                    gPointNumber++;
                 }
             }
             if(!is_within){
-                sum = sum + Math.abs((optimalList.get(i).fitnessfun() - 0));
+                sum = sum + Math.abs((gPointList.get(i).fitnessfun() - 0));
             }
         }
-        System.out.println("optimal found number = " + num);
         accuracy = accuracy * sum;
-        System.out.println("accurary = " + accuracy);
+
+        List<firefly> optimalPointList = new ArrayList<>();
+        for(int m = 0; m < Constant.optimalpoints.length; m++){
+            optimalPointList.add(new firefly(Constant.optimalpoints[m]));
+        }
+        int optimalPointSize = optimalPointList.size();
+        int optimalPointNumber = 0;
+        for(int i = 0;i < optimalPointSize; i++){
+            for(int j = 0;j < seedList.size(); j++){
+                if(distance(optimalPointList.get(i), seedList.get(j)) < Constant.Acc_Thr){
+                    optimalPointNumber++;
+                }
+            }
+        }
+        String s1 = "find global points: " + gPointNumber;
+        Constant.fileChaseFW(Constant.filePath, s1);
+        System.out.println(s1);
+
+        String s2 = "find optimal points: " + optimalPointNumber;
+        Constant.fileChaseFW(Constant.filePath, s2);
+        System.out.println(s2);
+
+        String s3 = "accuracy = " + accuracy;
+        Constant.fileChaseFW(Constant.filePath, s3);
+        System.out.println(s3);
         return accuracy;
     }
 }

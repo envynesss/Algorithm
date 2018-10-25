@@ -18,6 +18,7 @@ public class firefly implements Comparable{
     firefly pbest;
 
     public firefly(){
+        Dims = Constant.funDims;
         this.x = new double[Dims];
         if (Constant.codeNum == 1 || Constant.codeNum == 2 || Constant.codeNum == 7 || Constant.codeNum == 8) {
             for(int i = 0; i < Dims; i++){
@@ -37,6 +38,7 @@ public class firefly implements Comparable{
     }
 
     public firefly(double[] x){
+        Dims = Constant.funDims;
         this.x = x;
         fitnessfun();
     }

@@ -1,5 +1,9 @@
 package FunLibrary;
 
+import Firefly.Constant;
+
+import java.util.Arrays;
+
 /**
  * Functions Library for Algorithm
  */
@@ -18,7 +22,9 @@ public class FunLib {
         public static double[] f1_gpoint_4 = {0.7}; // 1
         public static double[] f1_gpoint_5 = {0.9}; // 1
         public static double[][] optimalpoints = {f1_gpoint_1,f1_gpoint_2,f1_gpoint_3,f1_gpoint_4,f1_gpoint_5};
-        public static final double alpha = 0.0001;
+        public static double[][] gpoints = optimalpoints;
+        public static double alpha = 0.0001;
+        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
     }
 
 
@@ -35,7 +41,9 @@ public class FunLib {
         public static double[] f2_gpoint_4 = {0.6814202229902825}; // 1.0
         public static double[] f2_gpoint_5 = {0.9338951933519088}; // 1.0
         public static double[][] optimalpoints = {f2_gpoint_1,f2_gpoint_2,f2_gpoint_3,f2_gpoint_4,f2_gpoint_5};
-        public static final double alpha = 0.0001;
+        public static double[][] gpoints = optimalpoints;
+        public static double alpha = 0.0001;
+        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
     }
 
 
@@ -51,7 +59,9 @@ public class FunLib {
         public static double[] f3_gpoint_3 = {-3.779310,-3.283186}; // 199.99999999999622
         public static double[] f3_gpoint_4 = {3.5844282964246212, -1.8481264669902808}; // 199.9999999999999
         public static double[][] optimalpoints = {f3_gpoint_1,f3_gpoint_2,f3_gpoint_3,f3_gpoint_4};
-        public static final double alpha=0.001;
+        public static double[][] gpoints = optimalpoints;
+        public static double alpha=0.001;
+        public static double Acc_Thr = 0.001; // Accuracy_Threshold
     }
 
     //f4 function related data
@@ -65,7 +75,9 @@ public class FunLib {
         public static double[] f4_gpoint_2 = {3.141592788664736, 2.27499936682943}; // 0.3978873577301041
         public static double[] f4_gpoint_3 = {9.424776866015131, 2.474999836991113}; // 0.39788735773607264
         public static double[][] optimalpoints = {f4_gpoint_1,f4_gpoint_2,f4_gpoint_3};
-        public static final double alpha=0.002;
+        public static double[][] gpoints = optimalpoints;
+        public static double alpha=0.002;
+        public static double Acc_Thr = 0.001; // Accuracy_Threshold
     }
 
     //f5 function related data
@@ -95,10 +107,27 @@ public class FunLib {
         public static double[] f5_gpoint_18 = {4.858, -0.8003}; // -186.73090030703474
         public static double[][] optimalpoints = {f5_gpoint_1,f5_gpoint_2,f5_gpoint_3,f5_gpoint_4,f5_gpoint_5,f5_gpoint_6,f5_gpoint_7,f5_gpoint_8,f5_gpoint_9,
                 f5_gpoint_10,f5_gpoint_11,f5_gpoint_12,f5_gpoint_13,f5_gpoint_14,f5_gpoint_15,f5_gpoint_16,f5_gpoint_17,f5_gpoint_18};
+        public static double[][] gpoints = optimalpoints;
+        public static double alpha=0.001; // 未配置好
+        public static double Acc_Thr = 0.001; // Accuracy_Threshold
     }
 
     //f6 function related data
-
+    public static class f6{
+        public static int codeNum = 6; //Function code number
+        public static int Dims = 2; //Function dimension
+        public static double species_rs = 3.5; //Function species radius
+        public static double[] maxRange = {5,5}; //Function max Range
+        public static double[] minRange = {-5,-5}; //Function min Range
+        public static double[] f9_gpoint_1 = {0,0};  // 2
+        public static double[] f9_gpoint_2 = {0,-4}; // 2
+        public static double[] f9_lpoint_3 = {-4,4}; // 1
+        public static double[] f9_lpoint_4 = {4,4}; // 1
+        public static double[][] optimalpoints = {f9_gpoint_1,f9_gpoint_2,f9_lpoint_3,f9_lpoint_4};
+        public static double[][] gpoints = {f9_gpoint_1,f9_gpoint_2};
+        public static double alpha=0.001;
+        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+    }
     //f7 function related data
     public static class f7{
         public static int codeNum = 7; //Function code number
@@ -112,6 +141,9 @@ public class FunLib {
         public static double[] f7_lpoint_4 = {0.7}; //0.4585020216023357
         public static double[] f7_lpoint_5 = {0.9}; //0.25
         public static double[][] optimalpoints = {f7_gpoint_1,f7_lpoint_2,f7_lpoint_3,f7_lpoint_4,f7_lpoint_5};
+        public static double[][] gpoints = {f7_gpoint_1};
+        public static double alpha=0.001; // 未配置好
+        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
     }
 
 
@@ -128,6 +160,9 @@ public class FunLib {
         public static double[] f8_lpoint_4 = {0.6814202178683114}; // 0.99999999999999
         public static double[] f8_lpoint_5 = {0.9338951689306259}; // 0.9999999999997322
         public static double[][] optimalpoints = {f8_gpoint_1,f8_lpoint_2,f8_lpoint_3,f8_lpoint_4,f8_lpoint_5};
+        public static double[][] gpoints = {f8_gpoint_1};
+        public static double alpha=0.001; // 未配置好
+        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
     }
 
 
@@ -135,26 +170,20 @@ public class FunLib {
     public static class f9{
         public static int codeNum = 9; //Function code number
         public static int Dims = 2; //Function dimension
-        public static double species_rs = 3.5; //Function species radius
-        public static double[] maxRange = {5,5}; //Function max Range
-        public static double[] minRange = {-5,-5}; //Function min Range
-        public static double[] f9_gpoint_1 = {0,0};  // 2
-        public static double[] f9_gpoint_2 = {0,-4}; // 2
-        public static double[] f9_lpoint_3 = {-4,4}; // 1
-        public static double[] f9_lpoint_4 = {4,4}; // 1
-        public static double[][] optimalpoints = {f9_gpoint_1,f9_gpoint_2,f9_lpoint_3,f9_lpoint_4};
-    }
-
-
-    //f10 function related data
-    public static class f10{
-        public static int codeNum = 10; //Function code number
-        public static int Dims = 2; //Function dimension
         public static double species_rs = 16; //Function species radius
         public static double[] maxRange = {5,5}; //Function max Range
         public static double[] minRange = {-5,-5}; //Function min Range
         public static double[] f10_gpoint_1 = {0,0}; // 0
         public static double[][] optimalpoints = {f10_gpoint_1};
+        public static double[][] gpoints = optimalpoints;
+        public static double alpha=0.001;
+        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+    }
+
+
+    //f10 function related data
+    public static class f10{
+
     }
 
     //f11 function related data
@@ -165,7 +194,11 @@ public class FunLib {
         public static double[] maxRange = {1.5,1.5}; //Function max Range
         public static double[] minRange = {-1.5,-1.5}; //Function min Range
         public static double[] f11_gpoint_1 = {0,0}; // 0
-        public static double[][] optimalpoints = {f11_gpoint_1};
+        public static double[] f11_2point_2 = {0,0}; // TODO：局部最优
+        public static double[][] optimalpoints = {f11_gpoint_1}; //TODO：局部最优
+        public static double[][] gpoints = {f11_gpoint_1};
+        public static double alpha=0.001; // 未配置好
+        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
     }
 
     /**
@@ -208,6 +241,9 @@ public class FunLib {
                 break;
 
             case 6:
+                fitness=Math.pow(Math.E,-Math.pow(x[0]-4,2)-Math.pow(x[1]-4, 2))
+                        +Math.pow(Math.E,-Math.pow(x[0]+4,2)-Math.pow(x[1]-4, 2))
+                        +2*(Math.pow(Math.E,-Math.pow(x[0],2)-Math.pow(x[1], 2))+Math.pow(Math.E,-Math.pow(x[0],2)-Math.pow(x[1]+4, 2)));
                 break;
 
             case 7:
@@ -223,16 +259,14 @@ public class FunLib {
                 break;
 
             case 9:
-                fitness=Math.pow(Math.E,-Math.pow(x[0]-4,2)-Math.pow(x[1]-4, 2))
-                    +Math.pow(Math.E,-Math.pow(x[0]+4,2)-Math.pow(x[1]-4, 2))
-                    +2*(Math.pow(Math.E,-Math.pow(x[0],2)-Math.pow(x[1], 2))+Math.pow(Math.E,-Math.pow(x[0],2)-Math.pow(x[1]+4, 2)));
-                break;
-
-            case 10:
-                for(int i=0;i<f10.Dims;i++){
+                for(int i=0;i<f9.Dims;i++){
                     fitness = fitness + Math.pow(x[i],2);
                 }
                 fitness = -fitness;
+                break;
+
+            case 10:
+
                 break;
 
             case 11:
