@@ -21,6 +21,9 @@ public class Swarm {
         }
     }
 
+    /**
+     * 生成种子集合
+     */
     public void setSeedList() {
         seedList.clear();
         sortSwarm();
@@ -45,9 +48,9 @@ public class Swarm {
         System.out.println();*/
     }
 
-    /*
-   粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关
-    */
+    /**
+     * 粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关
+     */
     public void move(){
         for(int i = 0; i < Constant.NumofP; i++){
             for(int j = 0; j < Constant.NumofP; j++){
@@ -66,9 +69,9 @@ public class Swarm {
         }
     }
 
-    /*
-    * 求两个firefly之间的距离
-    * */
+    /**
+     * 求两个firefly之间的距离
+     */
     public double distance(firefly f1,firefly f2){
         double distance = 0;
         for(int i = 0; i < Constant.funDims; i++){
@@ -77,9 +80,9 @@ public class Swarm {
         return Math.sqrt(distance);
     }
 
-    /*
-   对fireflyList进行降序排列
-    */
+    /**
+     * 对fireflyList进行降序排列
+     */
     public void sortSwarm(){
         for(int i = 0; i < Constant.NumofP; i++){
             fireflyList.get(i).fitnessfun();
@@ -90,7 +93,8 @@ public class Swarm {
     /**
      * 计算算法精确值函数
      */
-    public double getAccuracy(){
+    public List<Double> getAccuracy(){
+        List<Double> resultList = new ArrayList<>();
         List<firefly> gPointList = new ArrayList<>();
         for(int m = 0; m < Constant.gpoints.length; m++){
             gPointList.add(new firefly(Constant.gpoints[m]));
@@ -127,17 +131,29 @@ public class Swarm {
                 }
             }
         }
+
         String s1 = "find global points: " + gPointNumber;
         Constant.fileChaseFW(Constant.filePath, s1);
         System.out.println(s1);
 
-        String s2 = "find optimal points: " + optimalPointNumber;
+        int lPointNumber = optimalPointNumber - gPointNumber;
+        String s2 = "find local optimal points: " + (lPointNumber);
         Constant.fileChaseFW(Constant.filePath, s2);
         System.out.println(s2);
 
         String s3 = "accuracy = " + accuracy;
         Constant.fileChaseFW(Constant.filePath, s3);
         System.out.println(s3);
-        return accuracy;
+
+        double successRate = ((double)gPointNumber / gPointSize) * 100.0;
+        String s4 = "Success rate = " + successRate +"%" ;
+        Constant.fileChaseFW(Constant.filePath, s4);
+        System.out.println(s4);
+
+        resultList.add(accuracy);
+        resultList.add(successRate);
+        resultList.add((double)lPointNumber);
+
+        return resultList;
     }
 }

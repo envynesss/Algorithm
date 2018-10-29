@@ -48,6 +48,9 @@ public class speciesNSwarm extends speciesSwarm{
         System.out.println();*/
     }
 
+    /**
+     * 选取最好的未处理的粒子
+     */
     public firefly best_firefly(List<firefly> listfirefly) {
         List<firefly> unprocessed_listfirefly = new ArrayList<>();
         for (int i = 0; i < listfirefly.size(); i++) {

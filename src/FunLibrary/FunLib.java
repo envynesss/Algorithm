@@ -119,12 +119,12 @@ public class FunLib {
         public static double species_rs = 3.5; //Function species radius
         public static double[] maxRange = {5,5}; //Function max Range
         public static double[] minRange = {-5,-5}; //Function min Range
-        public static double[] f9_gpoint_1 = {0,0};  // 2
-        public static double[] f9_gpoint_2 = {0,-4}; // 2
-        public static double[] f9_lpoint_3 = {-4,4}; // 1
-        public static double[] f9_lpoint_4 = {4,4}; // 1
-        public static double[][] optimalpoints = {f9_gpoint_1,f9_gpoint_2,f9_lpoint_3,f9_lpoint_4};
-        public static double[][] gpoints = {f9_gpoint_1,f9_gpoint_2};
+        public static double[] f_gpoint_1 = {0,0};  // 2
+        public static double[] f_gpoint_2 = {0,-4}; // 2
+        public static double[] f_lpoint_3 = {-4,4}; // 1
+        public static double[] f_lpoint_4 = {4,4}; // 1
+        public static double[][] optimalpoints = {f_gpoint_1,f_gpoint_2,f_lpoint_3,f_lpoint_4};
+        public static double[][] gpoints = {f_gpoint_1,f_gpoint_2};
         public static double alpha=0.001;
         public static double Acc_Thr = 0.0001; // Accuracy_Threshold
     }
@@ -143,7 +143,7 @@ public class FunLib {
         public static double[][] optimalpoints = {f7_gpoint_1,f7_lpoint_2,f7_lpoint_3,f7_lpoint_4,f7_lpoint_5};
         public static double[][] gpoints = {f7_gpoint_1};
         public static double alpha=0.001; // 未配置好
-        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+        public static double Acc_Thr = 0.0025; // Accuracy_Threshold lpoint 0.0015:2, 0.002:3, 0.0025:4
     }
 
 
@@ -162,7 +162,7 @@ public class FunLib {
         public static double[][] optimalpoints = {f8_gpoint_1,f8_lpoint_2,f8_lpoint_3,f8_lpoint_4,f8_lpoint_5};
         public static double[][] gpoints = {f8_gpoint_1};
         public static double alpha=0.001; // 未配置好
-        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+        public static double Acc_Thr = 0.0025; // Accuracy_Threshold
     }
 
 
@@ -170,11 +170,11 @@ public class FunLib {
     public static class f9{
         public static int codeNum = 9; //Function code number
         public static int Dims = 2; //Function dimension
-        public static double species_rs = 16; //Function species radius
+        public static double species_rs = 2.5; //Function species radius
         public static double[] maxRange = {5,5}; //Function max Range
         public static double[] minRange = {-5,-5}; //Function min Range
-        public static double[] f10_gpoint_1 = {0,0}; // 0
-        public static double[][] optimalpoints = {f10_gpoint_1};
+        public static double[] f_gpoint_1 = {0,0}; // 0
+        public static double[][] optimalpoints = {f_gpoint_1};
         public static double[][] gpoints = optimalpoints;
         public static double alpha=0.001;
         public static double Acc_Thr = 0.0001; // Accuracy_Threshold
@@ -183,7 +183,16 @@ public class FunLib {
 
     //f10 function related data
     public static class f10{
-
+        public static int codeNum = 10; //Function code number
+        public static int Dims = 2; //Function dimension
+        public static double species_rs = 2.5; //Function species radius
+        public static double[] maxRange = {5,5}; //Function max Range
+        public static double[] minRange = {-5,-5}; //Function min Range
+        public static double[] f10_gpoint_1 = {0,0}; // 0
+        public static double[][] optimalpoints = {f10_gpoint_1};
+        public static double[][] gpoints = optimalpoints;
+        public static double alpha=0.001;
+        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
     }
 
     //f11 function related data
@@ -266,7 +275,14 @@ public class FunLib {
                 break;
 
             case 10:
-
+                for(int i=0;i<f10.Dims;i++){
+                    double temp10 = 0;
+                    for (int j = 0; j <= i; j++) {
+                        temp10 = temp10 + x[j];
+                    }
+                    fitness = fitness + Math.pow(temp10,2);
+                }
+                fitness = -fitness;
                 break;
 
             case 11:

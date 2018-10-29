@@ -18,11 +18,9 @@ public class Constant{
     //public static double alpha=0.001; // 函数中配置
 
     public static int iterations = 30000; //迭代次数
-    public static int runTimes = 30; //独立运行次数
+    public static int runTimes = 10; //独立运行次数
     public static int CBLS_step = 5; //局域搜索的探索次数
     public static double CBLS_move = 0.00000001; //局域搜索的移动距离
-    public static int RWDE_step = 5; //局域搜索的探索次数
-    public static double RWDE_move = 0.00000001; //局域搜索的移动距离
 
     //函数相关参数
     public static int codeNum;
@@ -38,8 +36,8 @@ public class Constant{
     //输出文件路径
     public static String filePath = "data.txt";
 
-    /*
-    Function 函数相关参数社设置
+    /**
+     * Function 函数相关参数社设置
      */
     public static void setFuncPara(int code_Num, int fun_Dims, double species_Rs, double[] max_Range, double[] min_Range,
                                    double[][] optimal_points, double[][] g_points, double Alpha, double acc_Thr) {
@@ -54,8 +52,8 @@ public class Constant{
         Constant.Acc_Thr = acc_Thr;
     }
 
-    /*
-    取到环形邻域结构的seed的邻域
+    /**
+     * 取到环形邻域结构的seed的邻域
      */
     public static List<Integer> get_neibor_num_list(int num, int k, int rs){
         List<Integer> list = new ArrayList<>();
@@ -97,26 +95,33 @@ public class Constant{
         return list;
     }
 
-    /*
-    取数组的平均值
+    /**
+     * 取数组的平均值
      */
-    public static double average(double[] array) {
+    public static double average(double[] array, int code) {
         double sum = 0;
+        int end = array.length;
         Arrays.sort(array);
-        for (int i = 0; i < array.length - array.length * 0.1; i++) {
+        if (code == 1) {
+            end = array.length - array.length / 10;
+        }
+        for (int i = 0; i < end; i++) {
             sum = sum + array[i];
         }
-        return sum / array.length;
+        return sum / end;
     }
 
-    /*
-    获得标准正太分布的随机因子
+    /**
+     * 获得标准正太分布的随机因子
      */
     public static double getGaussian(){
         Random r = new Random();
         return r.nextGaussian();
     }
 
+    /**
+     * 输出写入txt文件函数
+     */
     public static void fileChaseFW(String filePath, String content) {
         try {
             //构造函数中的第二个参数true表示以追加形式写文件

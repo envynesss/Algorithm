@@ -2,11 +2,14 @@ package Firefly;
 
 import FunLibrary.FunLib;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         String str;
 
-        FunLib.f1 f1 = new FunLib.f1();
+        /*FunLib.f1 f1 = new FunLib.f1();
         Constant.setFuncPara(f1.codeNum,f1.Dims,f1.species_rs,f1.maxRange,f1.minRange,f1.optimalpoints,f1.gpoints,f1.alpha,f1.Acc_Thr);
         str = "********************f1 function start*********************";
         System.out.println(str);
@@ -41,7 +44,7 @@ public class Main {
         Constant.fileChaseFW(Constant.filePath, str);
         runFunc();
 
-        /*FunLib.f6 f6 = new FunLib.f6();
+        FunLib.f6 f6 = new FunLib.f6();
         Constant.setFuncPara(f6.codeNum,f6.Dims,f6.species_rs,f6.maxRange,f6.minRange,f6.optimalpoints,f6.gpoints,f6.alpha,f6.Acc_Thr);
         str = "********************f6 function start*********************";
         System.out.println(str);
@@ -55,7 +58,7 @@ public class Main {
         Constant.fileChaseFW(Constant.filePath, str);
         runFunc();
 
-        FunLib.f8 f8 = new FunLib.f8();
+        /*FunLib.f8 f8 = new FunLib.f8();
         Constant.setFuncPara(f8.codeNum,f8.Dims,f8.species_rs,f8.maxRange,f8.minRange,f8.optimalpoints,f8.gpoints,f8.alpha,f8.Acc_Thr);
         str = "********************f8 function start*********************";
         System.out.println(str);
@@ -74,52 +77,70 @@ public class Main {
         str = "********************f10 function start*********************";
         System.out.println(str);
         Constant.fileChaseFW(Constant.filePath, str);
-        runFunc();
+        runFunc();*/
 
-        FunLib.f11 f11 = new FunLib.f11();
+        /*FunLib.f11 f11 = new FunLib.f11();
         Constant.setFuncPara(f11.codeNum,f11.Dims,f11.species_rs,f11.maxRange,f11.minRange,f11.optimalpoints,f11.gpoints,f11.alpha,f11.Acc_Thr);
         str = "********************f11 function start*********************";
         System.out.println(str);
         Constant.fileChaseFW(Constant.filePath, str);
-        runFunc();
+        runFunc();*/
     }
 
     public static void runFunc() {
         int times = Constant.runTimes;
-        double[] array = new double[times];
+        List<Double> resultList = new ArrayList<>();
+        double[] arrAccuracy = new double[times];
+        double[] arrVRate = new double[times];
+        double[] arrLPumber = new double[times];
 
-        String s11 = "runBaseSwarm()";
+        /*String s11 = "runBaseSwarm()";
         System.out.println(s11);
         Constant.fileChaseFW(Constant.filePath, s11);
         for (int i = 0; i < times; i++) {
-            array[i] = runBaseSwarm();
+            resultList = runBaseSwarm();
+            arrAccuracy[i] = resultList.get(0);
+            arrVRate[i] = resultList.get(1);
+            arrLPumber[i] = resultList.get(2);
         }
-        String s12 = "\n独立运行" + times + "次后 accuracy 平均值为：" + Constant.average(array);
+        String s12 = "\n独立运行" + times + "次后 accuracy 平均值为：" + Constant.average(arrAccuracy, 1);
+        s12 = s12 + " Success rate 平均值为：" + Constant.average(arrVRate, 0);
+        s12 = s12 + " find local optimal point 平均值为：" + Constant.average(arrLPumber, 0);
         System.out.println(s12);
-        Constant.fileChaseFW(Constant.filePath, s12);
+        Constant.fileChaseFW(Constant.filePath, s12);*/
 
         String s21 = "runSpeciesSwarm()";
         System.out.println(s21);
         Constant.fileChaseFW(Constant.filePath, s21);
         for (int i = 0; i < times; i++) {
-            array[i] = runSpeciesSwarm();
+            resultList = runSpeciesSwarm();
+            arrAccuracy[i] = resultList.get(0);
+            arrVRate[i] = resultList.get(1);
+            arrLPumber[i] = resultList.get(2);
         }
-        String s22 = "\n独立运行" + times + "次后 accuracy 平均值为：" + Constant.average(array);
+        String s22 = "\n独立运行" + times + "次后 accuracy 平均值为：" + Constant.average(arrAccuracy, 1);
+        s22 = s22 + " Success rate 平均值为：" + Constant.average(arrVRate, 0);
+        s22 = s22 + " find local optimal point 平均值为：" + Constant.average(arrLPumber, 0);
         System.out.println(s22);
         Constant.fileChaseFW(Constant.filePath, s22);
 
-        String s31 = "runSpeciesSwarm_number()";
+        /*String s31 = "runSpeciesSwarm_number()";
         System.out.println(s31);
         Constant.fileChaseFW(Constant.filePath, s31);
         for (int i = 0; i < times; i++) {
-            array[i] = runSpeciesSwarm_number();
+            resultList = runSpeciesSwarm_number();
+            arrAccuracy[i] = resultList.get(0);
+            arrVRate[i] = resultList.get(1);
+            arrLPumber[i] = resultList.get(2);
         }
-        String s32 = "\n独立运行" + times + "次后 accuracy 平均值为：" + Constant.average(array);
+        String s32 = "\n独立运行" + times + "次后 accuracy 平均值为：" + Constant.average(arrAccuracy, 1);
+        s32 = s32 + " Success rate 平均值为：" + Constant.average(arrVRate, 0);
+        s32 = s32 + " find local optimal point 平均值为：" + Constant.average(arrLPumber, 0);
         System.out.println(s32);
-        Constant.fileChaseFW(Constant.filePath, s32);
+        Constant.fileChaseFW(Constant.filePath, s32);*/
     }
 
-    public static double runBaseSwarm(){
+    public static List<Double> runBaseSwarm(){
         baseSwarm swarm = new baseSwarm();
         for(int k = 1; k <= Constant.iterations; k++){
             //System.out.println(k + "次*********************************");
@@ -137,7 +158,7 @@ public class Main {
         return swarm.getAccuracy();
     }
 
-    public static double runSpeciesSwarm() {
+    public static List<Double> runSpeciesSwarm() {
         speciesSwarm swarm= new speciesSwarm();
         swarm.setSeedList();
         for(int k = 1; k <= Constant.iterations; k++){
@@ -149,7 +170,7 @@ public class Main {
         return swarm.getAccuracy();
     }
 
-    public static double runSpeciesSwarm_number(){
+    public static List<Double> runSpeciesSwarm_number(){
         speciesNSwarm swarm= new speciesNSwarm();
         swarm.setSeedList();
         for(int k = 1; k <= Constant.iterations; k++){

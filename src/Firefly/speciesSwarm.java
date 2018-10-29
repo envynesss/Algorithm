@@ -10,9 +10,6 @@ public class speciesSwarm extends Swarm{
         super.setSeedList();
     }
 
-    /*
-    粒子朝比自己亮度高的粒子移动，移动的距离与粒子间吸引度和距离有关。
-     */
     @Override
     public void move(){
         //fireflyList.clear();
@@ -39,8 +36,8 @@ public class speciesSwarm extends Swarm{
         speciesList.clear();//speciesList小种群的list,清空以便下一次迭代放入
     }
 
-    /*
-    局域搜索函数 CBLS Step 和 RWDE Step
+    /**
+     * 局域搜索函数 CBLS Step 和 RWDE Step
      */
     public void CBLS_RWDE_fun() {
 
@@ -89,8 +86,8 @@ public class speciesSwarm extends Swarm{
         addPbestList();
     }
 
-    /*
-    更新每个粒子的历史最优值pbest
+    /**
+     * 更新每个粒子的历史最优值pbest
      */
     public void addPbestList(){
         for(int i = 0; i < Constant.NumofP; i++){
@@ -104,9 +101,9 @@ public class speciesSwarm extends Swarm{
         }
     }
 
-    /*
-   按种子给种群分子群
-    */
+    /**
+     * 按种子给种群分子群
+     */
     public void classification(){
 
         for(int i = 0; i < seedList.size(); i++){
