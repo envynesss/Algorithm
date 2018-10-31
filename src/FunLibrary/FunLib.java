@@ -24,7 +24,7 @@ public class FunLib {
         public static double[][] optimalpoints = {f1_gpoint_1,f1_gpoint_2,f1_gpoint_3,f1_gpoint_4,f1_gpoint_5};
         public static double[][] gpoints = optimalpoints;
         public static double alpha = 0.0001;
-        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+        public static double Acc_Thr = 0.0000001; // Accuracy_Threshold
     }
 
 
@@ -43,7 +43,7 @@ public class FunLib {
         public static double[][] optimalpoints = {f2_gpoint_1,f2_gpoint_2,f2_gpoint_3,f2_gpoint_4,f2_gpoint_5};
         public static double[][] gpoints = optimalpoints;
         public static double alpha = 0.0001;
-        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+        public static double Acc_Thr = 0.0000001; // Accuracy_Threshold
     }
 
 
@@ -61,7 +61,7 @@ public class FunLib {
         public static double[][] optimalpoints = {f3_gpoint_1,f3_gpoint_2,f3_gpoint_3,f3_gpoint_4};
         public static double[][] gpoints = optimalpoints;
         public static double alpha=0.001;
-        public static double Acc_Thr = 0.001; // Accuracy_Threshold
+        public static double Acc_Thr = 0.00001; // Accuracy_Threshold
     }
 
     //f4 function related data
@@ -77,7 +77,7 @@ public class FunLib {
         public static double[][] optimalpoints = {f4_gpoint_1,f4_gpoint_2,f4_gpoint_3};
         public static double[][] gpoints = optimalpoints;
         public static double alpha=0.002;
-        public static double Acc_Thr = 0.001; // Accuracy_Threshold
+        public static double Acc_Thr = 0.00001; // Accuracy_Threshold
     }
 
     //f5 function related data
@@ -125,8 +125,8 @@ public class FunLib {
         public static double[] f_lpoint_4 = {4,4}; // 1
         public static double[][] optimalpoints = {f_gpoint_1,f_gpoint_2,f_lpoint_3,f_lpoint_4};
         public static double[][] gpoints = {f_gpoint_1,f_gpoint_2};
-        public static double alpha=0.001;
-        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+        public static double alpha=0.0001;
+        public static double Acc_Thr = 0.00001; // Accuracy_Threshold
     }
     //f7 function related data
     public static class f7{
@@ -142,8 +142,8 @@ public class FunLib {
         public static double[] f7_lpoint_5 = {0.9}; //0.25
         public static double[][] optimalpoints = {f7_gpoint_1,f7_lpoint_2,f7_lpoint_3,f7_lpoint_4,f7_lpoint_5};
         public static double[][] gpoints = {f7_gpoint_1};
-        public static double alpha=0.001; // 未配置好
-        public static double Acc_Thr = 0.0025; // Accuracy_Threshold lpoint 0.0015:2, 0.002:3, 0.0025:4
+        public static double alpha=0.0001; // 未配置好
+        public static double Acc_Thr = 0.00125; // Accuracy_Threshold lpoint 0.0015:2, 0.002:3, 0.0025:4
     }
 
 
@@ -154,15 +154,15 @@ public class FunLib {
         public static double species_rs = 0.05; //Function species radius
         public static double[] maxRange = {1}; //Function max Range
         public static double[] minRange = {0}; //Function min Range
-        public static double[] f8_gpoint_1 = {0.07969966213537202}; // :0.9999999998929217
-        public static double[] f8_lpoint_2 = {0.24665546669843014}; // 0.9999999999998974
-        public static double[] f8_lpoint_3 = {0.45062670094296264}; // 0.9999999999999973
-        public static double[] f8_lpoint_4 = {0.6814202178683114}; // 0.99999999999999
-        public static double[] f8_lpoint_5 = {0.9338951689306259}; // 0.9999999999997322
+        public static double[] f8_gpoint_1 = {0.07972916815706897}; // 0.9991090310270107
+        public static double[] f8_lpoint_2 = {0.24665546669843014}; // 0.9545953361349704
+        public static double[] f8_lpoint_3 = {0.45062670094296264}; // 0.7669217995890066
+        public static double[] f8_lpoint_4 = {0.6789383041085573}; // 0.4823351006413628
+        public static double[] f8_lpoint_5 = {0.9297342454298296}; // 0.22341336187772662
         public static double[][] optimalpoints = {f8_gpoint_1,f8_lpoint_2,f8_lpoint_3,f8_lpoint_4,f8_lpoint_5};
         public static double[][] gpoints = {f8_gpoint_1};
-        public static double alpha=0.001; // 未配置好
-        public static double Acc_Thr = 0.0025; // Accuracy_Threshold
+        public static double alpha=0.0001; // 未配置好
+        public static double Acc_Thr = 0.00125; // Accuracy_Threshold
     }
 
 

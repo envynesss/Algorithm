@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * The Constants for FireFly Algorithm
+ * The Constants for Firefly Algorithm
  */
 public class Constant{
 
@@ -18,7 +18,7 @@ public class Constant{
     //public static double alpha=0.001; // 函数中配置
 
     public static int iterations = 30000; //迭代次数
-    public static int runTimes = 10; //独立运行次数
+    public static int runTimes = 30; //独立运行次数
     public static int CBLS_step = 5; //局域搜索的探索次数
     public static double CBLS_move = 0.00000001; //局域搜索的移动距离
 
@@ -129,6 +129,7 @@ public class Constant{
             fw.write(content);
             fw.write('\n');
             fw.close();
+            System.out.println(content);
         } catch (IOException e) {
             System.out.println("文件写入失败！" + e);
         }

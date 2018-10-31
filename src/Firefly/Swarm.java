@@ -1,13 +1,14 @@
 package Firefly;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.io.*;
 
 public class Swarm {
     List<firefly> fireflyList = new ArrayList();
     List<firefly> seedList = new ArrayList<>();
     List<List<firefly>> speciesList = new ArrayList<>();
+    int firstTime;
+    int gPointNumber;
 
     public Swarm(){
         for(int i = 0; i < Constant.NumofP; i++){
@@ -19,6 +20,8 @@ public class Swarm {
             }
             fireflyList.add(fy);
         }
+        firstTime = Constant.iterations;
+        gPointNumber = 0;
     }
 
     /**
@@ -91,21 +94,48 @@ public class Swarm {
     }
 
     /**
-     * 计算算法精确值函数
+     * 向文件写入种群x,y坐标，便于MATLAB 读取
+     * @param k 迭代的次数
      */
-    public List<Double> getAccuracy(){
-        List<Double> resultList = new ArrayList<>();
+    public void writeXY(int code, int k) {
+        FileWriter writer;
+        try {
+            if (k == 1 || k == Constant.iterations / 2 || k == Constant.iterations) {
+                String filepath = Constant.codeNum + "-" + code + "-" + k + ".txt";
+                writer = new FileWriter(filepath);
+                for (int i = 0; i < Constant.NumofP; i++){
+                    for (int d = 0; d < Constant.funDims; d++){
+                        writer.write(fireflyList.get(i).x[d] + " ");
+                    }
+                    writer.write("" + fireflyList.get(i).fitnessfun());
+                    writer.write("\n");
+                }
+                writer.flush();
+                writer.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 计算全局最优点精确值的函数
+     * @return 返回计算的精确值
+     */
+    public double getAccuracy(){
         List<firefly> gPointList = new ArrayList<>();
-        for(int m = 0; m < Constant.gpoints.length; m++){
+        int gPointLen = Constant.gpoints.length;
+        for(int m = 0; m < gPointLen; m++){
             gPointList.add(new firefly(Constant.gpoints[m]));
         }
-        int gPointSize = gPointList.size();
-        double accuracy = 1.0 / gPointSize;
+        double accuracy = 1.0 / gPointLen;
         double sum = 0;
-        int gPointNumber = 0;
-        for(int i = 0;i < gPointSize; i++){
+
+        gPointNumber = 0;
+        for(int i = 0; i < gPointLen; i++){
             boolean is_within = false;
-            for(int j = 0;j < seedList.size(); j++){
+            for(int j = 0; j < seedList.size(); j++){
                 if(distance(gPointList.get(i), seedList.get(j)) < Constant.Acc_Thr){
                     is_within = true;
                     sum = sum + Math.abs((gPointList.get(i).fitnessfun() - seedList.get(j).fitnessfun()));
@@ -117,42 +147,53 @@ public class Swarm {
             }
         }
         accuracy = accuracy * sum;
+        return accuracy;
+    }
+
+    /**
+     * 取到计算结果的集合
+     * @return 结果的集合
+     */
+    public List<Double> getResultList(){
+        List<Double> resultList = new ArrayList<>();
+        double accuracy = getAccuracy();
 
         List<firefly> optimalPointList = new ArrayList<>();
-        for(int m = 0; m < Constant.optimalpoints.length; m++){
+        int oPointLen = Constant.optimalpoints.length;
+        for(int m = 0; m < oPointLen; m++){
             optimalPointList.add(new firefly(Constant.optimalpoints[m]));
         }
-        int optimalPointSize = optimalPointList.size();
-        int optimalPointNumber = 0;
-        for(int i = 0;i < optimalPointSize; i++){
+        int oPointNumber = 0; // optimal points number
+        for(int i = 0;i < oPointLen; i++){
             for(int j = 0;j < seedList.size(); j++){
                 if(distance(optimalPointList.get(i), seedList.get(j)) < Constant.Acc_Thr){
-                    optimalPointNumber++;
+                    oPointNumber++;
                 }
             }
         }
 
-        String s1 = "find global points: " + gPointNumber;
-        Constant.fileChaseFW(Constant.filePath, s1);
-        System.out.println(s1);
+        int lPointNumber = oPointNumber - gPointNumber;
+        double successRate = ((double)gPointNumber / Constant.gpoints.length) * 100.0;
 
-        int lPointNumber = optimalPointNumber - gPointNumber;
+        /*String s1 = "find global points: " + gPointNumber;
+        Constant.fileChaseFW(Constant.filePath, s1);
+
         String s2 = "find local optimal points: " + (lPointNumber);
         Constant.fileChaseFW(Constant.filePath, s2);
-        System.out.println(s2);
 
         String s3 = "accuracy = " + accuracy;
         Constant.fileChaseFW(Constant.filePath, s3);
-        System.out.println(s3);
 
-        double successRate = ((double)gPointNumber / gPointSize) * 100.0;
         String s4 = "Success rate = " + successRate +"%" ;
         Constant.fileChaseFW(Constant.filePath, s4);
-        System.out.println(s4);
+
+        String s5 = "Minimum number of runs = " + this.firstTime;
+        Constant.fileChaseFW(Constant.filePath, s5);*/
 
         resultList.add(accuracy);
         resultList.add(successRate);
         resultList.add((double)lPointNumber);
+        resultList.add((double)this.firstTime);
 
         return resultList;
     }

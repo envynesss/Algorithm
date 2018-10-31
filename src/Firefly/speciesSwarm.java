@@ -1,6 +1,7 @@
 package Firefly;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class speciesSwarm extends Swarm{
@@ -12,7 +13,6 @@ public class speciesSwarm extends Swarm{
 
     @Override
     public void move(){
-        //fireflyList.clear();
         for(int n = 0; n < speciesList.size(); n++){
             for(int i = 0; i < speciesList.get(n).size(); i++){
                 for(int j = 0; j < speciesList.get(n).size(); j++){
@@ -31,7 +31,6 @@ public class speciesSwarm extends Swarm{
                     }
                 }
             }
-            //fireflyList.addAll(speciesList.get(n));
         }
         speciesList.clear();//speciesList小种群的list,清空以便下一次迭代放入
     }
@@ -39,18 +38,15 @@ public class speciesSwarm extends Swarm{
     /**
      * 局域搜索函数 CBLS Step 和 RWDE Step
      */
-    public void CBLS_RWDE_fun() {
-
+    public void localSearch(int k) {
         for (int i = 0; i < seedList.size(); i++) {
-            //System.out.println(i + " p...pbest...distance " + "#" + seedList.get(i).number + "..." + distance(seedList.get(i), seedList.get(i).pbest));
             double random = Math.random();
-            if (random < 1.0) {
+            if (random < 0.5) {
                 double Lambda = 1.0;
                 double[] xtemp = new double[Constant.funDims];
                 firefly fytemp = new firefly(xtemp);
                 if (distance(seedList.get(i), seedList.get(i).pbest) < 1.1e-6) {
                     //RWDE Step
-                    //System.out.println("#" + seedList.get(i).number + " Enter the RWDE Step out");
                     for (int index = 0; index < Constant.CBLS_step; index++) {
                         for(int j = 0; j < Constant.funDims; j++){
                             xtemp[j] = seedList.get(i).x[j];
@@ -60,24 +56,76 @@ public class speciesSwarm extends Swarm{
                             for(int j = 0; j < Constant.funDims; j++){
                                 seedList.get(i).x[j] = xtemp[j];
                             }
-                            //System.out.println("#" + seedList.get(i).number + " Enter the RWDE Step in");
                         }else {
                             Lambda = Lambda * 0.5;
                         }
                     }
                 } else {
-                    //CBLS Step
-                    //System.out.println("#" + seedList.get(i).number + " Enter the CBLS Step out");
-                    for (int index = 0; index < Constant.CBLS_step; index++) {
-                        for(int j = 0; j < Constant.funDims; j++) {
-                            xtemp[j] = seedList.get(i).x[j];
-                            xtemp[j] = xtemp[j] + Constant.beta0 * (seedList.get(i).pbest.x[j] - xtemp[j]) + Constant.CBLS_move;
-                        }
-                        if (fytemp.fitnessfun() > seedList.get(i).fitnessfun()) {
-                            for(int j = 0; j < Constant.funDims; j++) {
-                                seedList.get(i).x[j] = xtemp[j];
+                    double p = Math.random();
+                    if (0 < p && p < 1/3) {
+                        for (int index = 0; index < Constant.CBLS_step; index++) {
+                            for (int j = 0; j < Constant.funDims; j++) {
+                                xtemp[j] = seedList.get(i).x[j];
+                                xtemp[j] = xtemp[j] + Constant.beta0 * (seedList.get(i).pbest.x[j] - xtemp[j]) + Constant.CBLS_move;
                             }
-                            //System.out.println("#" + seedList.get(i).number + " Enter the CBLS Step in");
+                            if (fytemp.fitnessfun() > seedList.get(i).fitnessfun()) {
+                                for(int j = 0; j < Constant.funDims; j++) {
+                                    seedList.get(i).x[j] = xtemp[j];
+                                }
+                            }
+                        }
+                    }
+                    if (1/3 < p && p < 2/3) {
+                        boolean search = true;
+                        double st = Constant.CBLS_move;
+                        List<firefly> listSol = new ArrayList<>();
+                        while (search) {
+                            for(int j = 0; j < Constant.funDims; j++){
+                                xtemp[j] = seedList.get(i).x[j];
+                                xtemp[j] = seedList.get(i).x[j] + st;
+                                listSol.add(new firefly(xtemp));
+                                xtemp[j] = seedList.get(i).x[j];
+                                xtemp[j] = seedList.get(i).x[j] - st;
+                                listSol.add(new firefly(xtemp));
+                            }
+                            Collections.sort(listSol);
+                            firefly fbest = listSol.get(0);
+                            if (fbest.fitnessfun() > seedList.get(i).fitnessfun()) {
+                                seedList.get(i).x = fbest.x;
+                                seedList.get(i).fitnessfun();
+                            } else {
+                                search = false;
+                            }
+                        }
+                    }
+                    if (2/3 < p && p < 1) {
+                        double T = 100;
+                        double T_Min = 1;
+                        double r = 0.5;
+                        double st = Constant.CBLS_move;
+                        List<firefly> listSol = new ArrayList<>();
+                        while (T > T_Min) {
+                            for(int j = 0; j < Constant.funDims; j++){
+                                xtemp[j] = seedList.get(i).x[j];
+                                xtemp[j] = seedList.get(i).x[j] + st;
+                                listSol.add(new firefly(xtemp));
+                                xtemp[j] = seedList.get(i).x[j];
+                                xtemp[j] = seedList.get(i).x[j] - st;
+                                listSol.add(new firefly(xtemp));
+                            }
+                            Collections.sort(listSol);
+                            firefly fbest = listSol.get(0);
+                            double E = fbest.fitnessfun() - seedList.get(i).fitnessfun();
+                            if (E > 0) {
+                                seedList.get(i).x = fbest.x;
+                                seedList.get(i).fitnessfun();
+                            } else {
+                                if (Math.exp(E / T) > Math.random()) {
+                                    seedList.get(i).x = fbest.x;
+                                    seedList.get(i).fitnessfun();
+                                }
+                            }
+                            T = T * r;
                         }
                     }
                 }
@@ -91,12 +139,10 @@ public class speciesSwarm extends Swarm{
      */
     public void addPbestList(){
         for(int i = 0; i < Constant.NumofP; i++){
-            //System.out.println("addPbestList() out");
             if(fireflyList.get(i).fitnessfun() > fireflyList.get(i).pbest.fitnessfun()) {
                 for(int j = 0; j < Constant.funDims; j++) {
                     fireflyList.get(i).pbest.x[j] = fireflyList.get(i).x[j];
                 }
-                //System.out.println("addPbestList() in #" + listfirefly.get(i).bianhao);
             }
         }
     }
