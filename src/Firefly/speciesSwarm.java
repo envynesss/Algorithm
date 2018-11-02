@@ -38,7 +38,7 @@ public class speciesSwarm extends Swarm{
     /**
      * 局域搜索函数 CBLS Step 和 RWDE Step
      */
-    public void localSearch(int k) {
+    public void localSearch() {
         for (int i = 0; i < seedList.size(); i++) {
             double random = Math.random();
             if (random < 0.5) {

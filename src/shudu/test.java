@@ -2,34 +2,34 @@ package shudu;
 
 import FunLibrary.FunLib;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class test{
     public static void main(String[] args) {
-        //{0.07972916815706897}; // 0.9991090310270105
-        //{0.24665546669843014}; // 0.9545953361349705
-        //{0.45062670094296264}; // 0.7669217995890066
-        //{0.6789383041085573}; // 0.4823351006413628
-        //{0.9297342454298296}; // 0.22341336187772662
-        double[][] x_temp = new double[5][1];
-        String s = "[0.07972916797568522]\n" +
-                "[0.24627774377415926]\n" +
-                "[0.4494078567069479]\n" +
-                "[0.6789383038586885]\n" +
-                "[0.9297342456419284]";
+        /*double[][] x_temp = new double[5][2];
+        String s = "[-3.1415928390709174, 12.275000278553842]\n" +
+                "[3.141593142539463, 2.2749996020727328]\n" +
+                "[9.42477840277364, 2.474999606016829]";
         String[] ss = s.split("\n");
         for (int i = 0; i < ss.length; i++) {
-            x_temp[i][0] = Double.parseDouble(ss[i].substring(1, ss[i].length() - 1));
-        }
+            String n = ss[i].substring(1, ss[i].length() - 1);
+            String[] nn = n.split(",");
+            for (int j = 0; j < nn.length; j++) {
+                x_temp[0][j] = Double.parseDouble(nn[j].trim());
+            }
+        }*/
 
-        double[][] x_best = {{0.07972916815706897},{0.24665546669843014},{0.45062670094296264},{0.6789383041085573},{0.9297342454298296}};
+        double[][] x_temp = {{-Math.PI, 12.275},{Math.PI, 2.275},{3 * Math.PI, 2.475}};
+
+        double[][] x_best = {FunLib.f4.f4_gpoint_1,FunLib.f4.f4_gpoint_2,FunLib.f4.f4_gpoint_3};
         for (int i = 0; i < x_best.length; i++) {
-            double f_best = FunLib.funLib(x_best[i], 8);
-            double f_temp = FunLib.funLib(x_temp[i], 8);
+            double f_best = FunLib.funLib(x_best[i], 4);
+            double f_temp = FunLib.funLib(x_temp[i], 4);
             if (f_temp > f_best) {
-                System.out.println(x_best[i][0] + "}; // " + f_temp);
+                System.out.println(x_temp[i][0] + ", " + x_temp[i][1] + "}; // " + f_temp);
             }
         }
     }

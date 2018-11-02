@@ -61,7 +61,7 @@ public class FunLib {
         public static double[][] optimalpoints = {f3_gpoint_1,f3_gpoint_2,f3_gpoint_3,f3_gpoint_4};
         public static double[][] gpoints = optimalpoints;
         public static double alpha=0.001;
-        public static double Acc_Thr = 0.00001; // Accuracy_Threshold
+        public static double Acc_Thr = 0.00005; // Accuracy_Threshold
     }
 
     //f4 function related data
@@ -71,13 +71,13 @@ public class FunLib {
         public static double species_rs = Math.PI + 1; //Function species radius
         public static double[] maxRange = {10,15}; //Function max Range
         public static double[] minRange = {-5,0}; //Function min Range
-        public static double[] f4_gpoint_1 = {-3.1415940461907352, 12.275003843336965}; // 0.39788735773041317
-        public static double[] f4_gpoint_2 = {3.141592788664736, 2.27499936682943}; // 0.3978873577301041
-        public static double[] f4_gpoint_3 = {9.424776866015131, 2.474999836991113}; // 0.39788735773607264
+        public static double[] f4_gpoint_1 = {-Math.PI, 12.275}; //-0.39788735772973816
+        public static double[] f4_gpoint_2 = {Math.PI, 2.275}; //  -0.39788735772973816
+        public static double[] f4_gpoint_3 = {3*Math.PI, 2.475}; //-0.39788735772973816
         public static double[][] optimalpoints = {f4_gpoint_1,f4_gpoint_2,f4_gpoint_3};
         public static double[][] gpoints = optimalpoints;
-        public static double alpha=0.002;
-        public static double Acc_Thr = 0.00001; // Accuracy_Threshold
+        public static double alpha=0.001;
+        public static double Acc_Thr = 0.00005; // Accuracy_Threshold
     }
 
     //f5 function related data
@@ -136,10 +136,10 @@ public class FunLib {
         public static double[] maxRange = {1}; //Function max Range
         public static double[] minRange = {0}; //Function min Range
         public static double[] f7_gpoint_1 = {0.1}; //1.0
-        public static double[] f7_lpoint_2 = {0.3}; //0.9170040432046712
-        public static double[] f7_lpoint_3 = {0.5}; //0.7071067811865476
-        public static double[] f7_lpoint_4 = {0.7}; //0.4585020216023357
-        public static double[] f7_lpoint_5 = {0.9}; //0.25
+        public static double[] f7_lpoint_2 = {0.29941646977674397}; // 0.9172358899604152
+        public static double[] f7_lpoint_3 = {0.49883303750620595}; // 0.7078221356124454
+        public static double[] f7_lpoint_4 = {0.6982497999696433}; // 0.4595462709964165
+        public static double[] f7_lpoint_5 = {0.8976668561314929}; // 0.25101303015873766
         public static double[][] optimalpoints = {f7_gpoint_1,f7_lpoint_2,f7_lpoint_3,f7_lpoint_4,f7_lpoint_5};
         public static double[][] gpoints = {f7_gpoint_1};
         public static double alpha=0.0001; // 未配置好

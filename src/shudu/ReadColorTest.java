@@ -73,7 +73,7 @@ public class ReadColorTest {
         ReadColorTest rc = new ReadColorTest();
         x = rc.getScreenPixel(100, 345);
         System.out.println(x + " - ");
-        rc.getImagePixel("D:\\car.jpg");
+        rc.getImagePixel("T.png");
     }
 
 }

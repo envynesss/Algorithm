@@ -7,7 +7,7 @@ public class speciesNSwarm extends speciesSwarm{
     @Override
     public void setSeedList() {
         seedList.clear();
-        int rs = 4;
+        int rs = Constant.NumofP / (Constant.optimalpoints.length * 3);
         int unprocessed_num = fireflyList.size();
         for (int i = 0; i < fireflyList.size(); i++) {
             fireflyList.get(i).isProcessed = false;
