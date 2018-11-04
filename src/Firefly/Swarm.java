@@ -44,11 +44,6 @@ public class Swarm {
                 fireflyList.get(i).seed = fireflyList.get(i);
             }
         }
-        /*System.out.println("seedList长度为：" + seedList.size());
-        for(int i = 0; i < seedList.size(); i++){
-            System.out.print( "#" + seedList.get(i).number + ":" + seedList.get(i).fitnessfun() + ",");
-        }
-        System.out.println();*/
     }
 
     /**
@@ -98,11 +93,11 @@ public class Swarm {
      * @param k 迭代的次数
      */
     public void writeXY(int code, int k) {
-        FileWriter writer;
         try {
             if (k == 1 || k == Constant.iterations / 2 || k == Constant.iterations) {
+                FileWriter writer;
                 String filepath = Constant.codeNum + "-" + code + "-" + k + ".txt";
-                writer = new FileWriter(filepath);
+                writer = new FileWriter(Constant.folder + filepath);
                 for (int i = 0; i < Constant.NumofP; i++){
                     for (int d = 0; d < Constant.funDims; d++){
                         writer.write(fireflyList.get(i).x[d] + " ");
@@ -113,7 +108,6 @@ public class Swarm {
                 writer.flush();
                 writer.close();
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

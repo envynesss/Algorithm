@@ -1,9 +1,5 @@
 package FunLibrary;
 
-import Firefly.Constant;
-
-import java.util.Arrays;
-
 /**
  * Functions Library for Algorithm
  */

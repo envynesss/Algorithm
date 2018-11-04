@@ -1,4 +1,4 @@
-package shudu;
+package Ncc;
 
 import java.awt.AWTException;
 import java.awt.Dimension;

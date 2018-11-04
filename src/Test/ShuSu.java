@@ -1,4 +1,4 @@
-package shudu;
+package Test;
 import java.util.*;
 
 public class ShuSu {

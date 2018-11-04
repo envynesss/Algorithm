@@ -1,11 +1,6 @@
-package shudu;
+package Test;
 
-import FunLibrary.FunLib;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import Ncc.NccValue;
 
 public class test{
     public static void main(String[] args) {
@@ -22,7 +17,7 @@ public class test{
             }
         }*/
 
-        double[][] x_temp = {{-Math.PI, 12.275},{Math.PI, 2.275},{3 * Math.PI, 2.475}};
+        /*double[][] x_temp = {{-Math.PI, 12.275},{Math.PI, 2.275},{3 * Math.PI, 2.475}};
 
         double[][] x_best = {FunLib.f4.f4_gpoint_1,FunLib.f4.f4_gpoint_2,FunLib.f4.f4_gpoint_3};
         for (int i = 0; i < x_best.length; i++) {
@@ -30,6 +25,20 @@ public class test{
             double f_temp = FunLib.funLib(x_temp[i], 4);
             if (f_temp > f_best) {
                 System.out.println(x_temp[i][0] + ", " + x_temp[i][1] + "}; // " + f_temp);
+            }
+        }*/
+        NccValue nv = new NccValue();
+        printArray(nv.nccMatrix, 543, 452);
+        //speciesSwarm swarm= new speciesSwarm();
+    }
+
+    public static void printArray(double[][] array, int row, int col) {
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (array[i][j] > 0.8848) {
+                    System.out.println("(" + i +", " + j + ", " + array[i][j] + ")");
+                }
             }
         }
     }

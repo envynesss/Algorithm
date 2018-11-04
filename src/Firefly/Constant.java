@@ -34,7 +34,8 @@ public class Constant{
     public static double Acc_Thr;
 
     //输出文件路径
-    public static String filePath = "data.txt";
+    public static String folder = "z-output/";
+    public static String filePath = folder + "0_data.txt";
 
     /**
      * Function 函数相关参数社设置
@@ -132,6 +133,16 @@ public class Constant{
             System.out.println(content);
         } catch (IOException e) {
             System.out.println("文件写入失败！" + e);
+        }
+    }
+
+    public static void printArray(double[][] array, int row, int col) {
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println();
         }
     }
 }
