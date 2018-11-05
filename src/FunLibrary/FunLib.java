@@ -80,8 +80,8 @@ public class FunLib {
     public static class f5{
         public static int codeNum = 5; //Function code number
         public static int Dims = 2; //Function dimension
-        public static double species_rs = 1; //Function species radius
-        public static double[] maxRange = {10,10}; //Function max Range
+        public static double species_rs = 2.5; //Function species radius
+        public static double[] maxRange = {8,8}; //Function max Range
         public static double[] minRange = {-10,-10}; //Function min Range
         public static double[] f5_gpoint_1 = {-7.0835, 4.8580}; // -186.73090120018114
         public static double[] f5_gpoint_2 = {-7.0835, -7.7083}; // -186.730908300575
@@ -104,8 +104,8 @@ public class FunLib {
         public static double[][] optimalpoints = {f5_gpoint_1,f5_gpoint_2,f5_gpoint_3,f5_gpoint_4,f5_gpoint_5,f5_gpoint_6,f5_gpoint_7,f5_gpoint_8,f5_gpoint_9,
                 f5_gpoint_10,f5_gpoint_11,f5_gpoint_12,f5_gpoint_13,f5_gpoint_14,f5_gpoint_15,f5_gpoint_16,f5_gpoint_17,f5_gpoint_18};
         public static double[][] gpoints = optimalpoints;
-        public static double alpha=0.001; // 未配置好
-        public static double Acc_Thr = 0.001; // Accuracy_Threshold
+        public static double alpha=0.01; // 未配置好
+        public static double Acc_Thr = 0.01; // Accuracy_Threshold
     }
 
     //f6 function related data

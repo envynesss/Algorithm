@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Constant{
 
-    public static final int NumofP = 50;
+    public static final int NumofP = 100;
     //γ为light_absorption光吸收率属于[0.1,10],its setting depends on the problem to be optimized.
     public static final double gamma=0.9;
     //β0

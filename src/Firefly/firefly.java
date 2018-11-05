@@ -31,7 +31,7 @@ public class firefly implements Comparable{
         }
         else {
             for(int i = 0; i < Dims; i++){
-                this.x[i] = Math.random() * Constant.maxRange[i] * 2 - Constant.maxRange[i];
+                this.x[i] = Math.random() * (Constant.maxRange[i] - Constant.minRange[i])  + Constant.minRange[i];
             }
         }
         fitnessfun();

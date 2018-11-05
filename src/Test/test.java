@@ -1,6 +1,10 @@
 package Test;
 
+import FunLibrary.FunLib;
 import Ncc.NccValue;
+
+import java.util.Random;
+
 
 public class test{
     public static void main(String[] args) {
@@ -27,12 +31,14 @@ public class test{
                 System.out.println(x_temp[i][0] + ", " + x_temp[i][1] + "}; // " + f_temp);
             }
         }*/
-        NccValue nv = new NccValue();
-        printArray(nv.nccMatrix, 543, 452);
+        Random rand = new Random();
+        System.out.println(rand.nextDouble()*8);
+        //NccValue nv = new NccValue();
+        //printArray(nv.nccMatrix, 543, 452);
         //speciesSwarm swarm= new speciesSwarm();
     }
 
-    public static void printArray(double[][] array, int row, int col) {
+    /*public static void printArray(double[][] array, int row, int col) {
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -41,5 +47,5 @@ public class test{
                 }
             }
         }
-    }
+    }*/
 }
