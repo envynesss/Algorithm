@@ -35,7 +35,6 @@ public class test{
         System.out.println(rand.nextDouble()*8);
         //NccValue nv = new NccValue();
         //printArray(nv.nccMatrix, 543, 452);
-        //speciesSwarm swarm= new speciesSwarm();
     }
 
     /*public static void printArray(double[][] array, int row, int col) {
