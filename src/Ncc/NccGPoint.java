@@ -2,32 +2,49 @@ package Ncc;
 
 import java.util.Random;
 import java.util.*;
-//4个最优点的坐标： (153, 179, 0.85313)，(278, 282, 0.9251)，(300, 385, 0.88532)，(340, 156, 0.88512)。
+//4个最优点的坐标： (153, 178, 0.88484)，(278, 282, 0.9251)，(300, 385, 0.88532)，(340, 156, 0.88512)。
 public class NccGPoint {
     public static void main(String[] args) {
         NccValue nv = new NccValue();
-        run(0);
-        System.out.println("********************");
-        run(1);
+        for (int i = 0; i < 10; i++) {
+            run(0);
+            run(1);
+        }
     }
 
     public static void run(int code) {
         long sTime = new Date().getTime();
         PointSwarm swarm = new PointSwarm();
+        int[][] state = new int[543][452];
         swarm.setSeedList();
         for(int k = 1; k <= NccConstant.iterations; k++){
-            if (code != 0) {
+            if (code != 0 && k > NccConstant.iterations / 3) {
                 swarm.localSearch();
             }
             swarm.classification();
             swarm.move();
             swarm.setSeedList();
         }
-        System.out.println("seedList size: " + swarm.seedList.size());
-        for (int i = 0; i < 6; i++) {
-            System.out.println(swarm.seedList.get(i));
+        for (int i = 0; i < swarm.pointList.size(); i++) {
+            int row = swarm.pointList.get(i).x[0];
+            int col = swarm.pointList.get(i).x[1];
+            state[row][col] = 1;
         }
+        int sum = 0;
+        for (int i = 0; i < 543; i++) {
+            for (int j = 0; j < 452; j++) {
+                if (state[i][j] == 1) {
+                    sum++;
+                }
+            }
+        }
+        System.out.println("sum:" + sum);
+        /*System.out.println("seedList size: " + swarm.seedList.size());
+        for (int i = 0; i < NccConstant.validSeedSize; i++) {
+            System.out.println(swarm.seedList.get(i));
+        }*/
 
+        System.out.println("swarm.getGPointNumber():" + swarm.getGPointNumber());
         long eTime = new Date().getTime();
         String str = "run time:" + 1.0 * (eTime - sTime) / (1000 * 60) + "M";
         System.out.println(str);
@@ -36,24 +53,27 @@ public class NccGPoint {
 }
 
 class NccConstant{
-
-    public static final int NumofP = 200;
+    //4个最优点的坐标： (153, 178, 0.88484)，(278, 282, 0.9251)，(300, 385, 0.88532)，(340, 156, 0.88512)。
+    public static final int NumofP = 800;
     //γ为light_absorption光吸收率属于[0.1,10],its setting depends on the problem to be optimized.
-    public static final double gamma=0.9;
+    public static final double gamma = 0.9;
     //β0
-    public static final double beta0=0.1;
+    public static final double beta0 = 0.1;
     //α为Step factor步长因子属于[0,1]
-    public static double alpha=0.1; // 函数中配置
+    public static double alpha = 0.2; // 函数中配置
 
-    public static int iterations = 20000; //迭代次数
+    public static int iterations = 40; //迭代次数
     public static int runTimes = 1; //独立运行次数
     public static int LS_move = 1;
 
     //函数相关参数
     public static int funDims = 2;
-    public static double species_rs = 60;
+    public static double species_rs = 75;
     public static int[] maxRange = {400, 450}; // {543, 452};
     public static int[] minRange = {100, 100};
+    public static int[][] gPoints = {{153,178}, {278,282}, {300,385}, {340,156}};
+    public static int validSeedSize = 6;
+    public static double Acc_Thr = 2.1;
 
     /**
      * 获得标准正太分布的随机因子
@@ -61,16 +81,6 @@ class NccConstant{
     public static double getGaussian(){
         Random r = new Random();
         return r.nextGaussian();
-    }
-
-    public static void printArray(double[][] array, int row, int col) {
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                System.out.print(array[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 }
 
@@ -204,9 +214,12 @@ class PointSwarm{
                 while (search) {
                     for(int j = 0; j < NccConstant.funDims; j++){
                         xtemp[j] = seedList.get(i).x[j] + st;
-                        //TODO:边界条件
+                        if (xtemp[j] > NccConstant.maxRange[j]) xtemp[j] = NccConstant.maxRange[j];
+                        if (xtemp[j] < NccConstant.minRange[j]) xtemp[j] = NccConstant.minRange[j];
                         listSol.add(new Point(xtemp));
                         xtemp[j] = seedList.get(i).x[j] - st;
+                        if (xtemp[j] > NccConstant.maxRange[j]) xtemp[j] = NccConstant.maxRange[j];
+                        if (xtemp[j] < NccConstant.minRange[j]) xtemp[j] = NccConstant.minRange[j];
                         listSol.add(new Point(xtemp));
                     }
                     Collections.sort(listSol);
@@ -254,6 +267,23 @@ class PointSwarm{
             }
             speciesList.add(species);
         }
+    }
+
+    public int getGPointNumber(){
+        List<Point> gPointList = new ArrayList<>();
+        int gPointLen = NccConstant.gPoints.length;
+        for(int i = 0; i < gPointLen; i++){
+            gPointList.add(new Point(NccConstant.gPoints[i]));
+        }
+        int gPointNumber = 0;
+        for(int i = 0; i < gPointLen; i++){
+            for(int j = 0; j < NccConstant.validSeedSize; j++){
+                if(distance(gPointList.get(i), seedList.get(j)) < NccConstant.Acc_Thr){
+                    gPointNumber++;
+                }
+            }
+        }
+        return gPointNumber;
     }
 
 }
