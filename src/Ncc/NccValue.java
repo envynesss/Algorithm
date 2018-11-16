@@ -1,16 +1,16 @@
 package Ncc;
 
-import Firefly.Constant;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class NccValue {
     public static double[][] nccMatrix;
+    public static int row = 543;
+    public static int col = 452;
 
     public NccValue() {
-        setNccMatrix("src/Ncc/ncc.txt", 543, 452);
+        setNccMatrix("src/Ncc/ncc.txt", row, col);
     }
 
     public static void setNccMatrix(String filePath, int row, int col) {

@@ -31,10 +31,11 @@ public class test{
                 System.out.println(x_temp[i][0] + ", " + x_temp[i][1] + "}; // " + f_temp);
             }
         }*/
-        Random rand = new Random();
-        System.out.println(rand.nextDouble()*8);
+        //Random rand = new Random();
+        //System.out.println(rand.nextDouble()*8);
         //NccValue nv = new NccValue();
         //printArray(nv.nccMatrix, 543, 452);
+
     }
 
     /*public static void printArray(double[][] array, int row, int col) {
