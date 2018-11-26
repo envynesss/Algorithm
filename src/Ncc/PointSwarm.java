@@ -1,5 +1,7 @@
 package Ncc;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -14,9 +16,9 @@ class PointSwarm{
     public PointSwarm(){
         for(int i = 0; i < NC.NumofP; i++){
             Point point = new Point();
-            point.pbest = new Point();
+            point.pBest = new Point();
             for(int j = 0; j < NC.funDims; j++){
-                point.pbest.x[j] = point.x[j];
+                point.pBest.x[j] = point.x[j];
             }
             pointList.add(point);
         }
@@ -58,18 +60,16 @@ class PointSwarm{
         for(int n = 0; n < speciesList.size(); n++){
             for(int i = 0; i < speciesList.get(n).size(); i++){
                 for(int j = 0; j < speciesList.get(n).size(); j++){
-                    if(speciesList.get(n).get(i).getlightIntensity(distance(speciesList.get(n).get(i), speciesList.get(n).get(j)))
-                            < speciesList.get(n).get(j).getlightIntensity(distance(speciesList.get(n).get(i), speciesList.get(n).get(j)))){
-
+                    Point pi = speciesList.get(n).get(i);
+                    Point pj = speciesList.get(n).get(j);
+                    if(pi.getLightIntensity() < pj.getLightIntensity()){
                         for(int d = 0; d < NC.funDims; d++){
-                            speciesList.get(n).get(i).x[d] = (int)(speciesList.get(n).get(i).x[d]
-                                    + speciesList.get(n).get(j).getAttractiveness(distance(speciesList.get(n).get(i), speciesList.get(n).get(j)))
-                                    * (speciesList.get(n).get(j).x[d] - speciesList.get(n).get(i).x[d])
-                                    + NC.alpha * (NC.getGaussian()-0.5));
-                            if(speciesList.get(n).get(i).x[d] > NC.maxRange[d]) speciesList.get(n).get(i).x[d] = NC.maxRange[d];
-                            if(speciesList.get(n).get(i).x[d] < NC.minRange[d]) speciesList.get(n).get(i).x[d] = NC.minRange[d];
+                            double beta = pj.getAttractiveness(distance(pi, pj));
+                            pi.x[d] = (int)(pi.x[d] + beta * (pj.x[d] - pi.x[d]) + NC.alpha * (Math.random() - 0.5));
+                            if(pi.x[d] > NC.maxRange[d]) pi.x[d] = NC.maxRange[d];
+                            if(pi.x[d] < NC.minRange[d]) pi.x[d] = NC.minRange[d];
                         }
-                        speciesList.get(n).get(i).fitnessfun();
+                        pi.fitnessfun();
                     }
                 }
             }
@@ -87,7 +87,7 @@ class PointSwarm{
                 double Lambda = 1.0;
                 int[] xTemp = new int[NC.funDims];
                 Point pTemp = new Point(xTemp);
-                if (distance(seedList.get(i), seedList.get(i).pbest) < 2) {
+                if (distance(seedList.get(i), seedList.get(i).pBest) < 2) {
                     for (int index = 0; index < NC.CBLS_step; index++) {
                         for(int j = 0; j < NC.funDims; j++){
                             xTemp[j] = seedList.get(i).x[j];
@@ -107,7 +107,7 @@ class PointSwarm{
                     for (int index = 0; index < NC.CBLS_step; index++) {
                         for (int j = 0; j < NC.funDims; j++) {
                             xTemp[j] = seedList.get(i).x[j];
-                            xTemp[j] = (int)(xTemp[j] + NC.beta0 * (seedList.get(i).pbest.x[j] - xTemp[j]) + NC.LS_move);
+                            xTemp[j] = (int)(xTemp[j] + NC.beta0 * (seedList.get(i).pBest.x[j] - xTemp[j]) + NC.LS_move);
                             if(xTemp[j] > NC.maxRange[j]) xTemp[j] = NC.maxRange[j];
                             if(xTemp[j] < NC.minRange[j]) xTemp[j] = NC.minRange[j];
                         }
@@ -126,17 +126,17 @@ class PointSwarm{
     /**
      * 除去pointList里的冗余粒子；
      */
-    public void SetRedundant(){
+    public void SetRedundant(int k){
+        if (k > 0.8 * NC.iterations) return;
         Iterator<Point> pointListIter = pointList.iterator();
         while (pointListIter.hasNext()) {
-            Point ptemp = pointListIter.next();
-            if(distance(ptemp, ptemp.seed) < NC.in && ptemp != ptemp.seed)
+            Point pTemp = pointListIter.next();
+            if(distance(pTemp, pTemp.seed) < NC.in && pTemp != pTemp.seed)
                 pointListIter.remove();
         }
         while(pointList.size() < NC.NumofP){
             pointList.add(new Point());
-            //System.out.println("pointList里通过pointList.add(new Particle())");
-            pointList.get(pointList.size() - 1).pbest = pointList.get(pointList.size() - 1);
+            pointList.get(pointList.size() - 1).pBest = pointList.get(pointList.size() - 1);
 
         }
     }
@@ -164,9 +164,9 @@ class PointSwarm{
      */
     public void addPbestList(){
         for(int i = 0; i < NC.NumofP; i++){
-            if(pointList.get(i).fitnessfun() > pointList.get(i).pbest.fitnessfun()) {
+            if(pointList.get(i).fitnessfun() > pointList.get(i).pBest.fitnessfun()) {
                 for(int j = 0; j < NC.funDims; j++) {
-                    pointList.get(i).pbest.x[j] = pointList.get(i).x[j];
+                    pointList.get(i).pBest.x[j] = pointList.get(i).x[j];
                 }
             }
         }
@@ -210,6 +210,13 @@ class PointSwarm{
     }
 
     /**
+     * 子种群数（种群种子数）
+     */
+    public int getSeedNumber(){
+        return seedList.size();
+    }
+
+    /**
      * 访问的点的总个数
      */
     public int getVisitNumber(){
@@ -222,6 +229,35 @@ class PointSwarm{
             }
         }
         return sum;
+    }
+
+    /**
+     * 向文件写入种群x,y坐标，便于MATLAB 读取
+     * @param k 迭代的次数
+     */
+    public void writeXY(int k) {
+        try {
+            if (k == 0 || k == NC.iterations / 2 || k == NC.iterations) {
+                FileWriter writer;
+                int kk = 0;
+                if(k == 0) kk = 1;
+                if(k == NC.iterations / 2) kk = 2;
+                if(k == NC.iterations) kk = 3;
+                String filepath = "01-ncc-" + kk + ".txt";
+                writer = new FileWriter(NC.folder + filepath);
+                for (int i = 0; i < NC.NumofP; i++){
+                    for (int d = 0; d < NC.funDims; d++){
+                        writer.write(pointList.get(i).x[d] + " ");
+                    }
+                    writer.write("" + pointList.get(i).fitnessfun());
+                    writer.write("\n");
+                }
+                writer.flush();
+                writer.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -8,7 +8,8 @@ import java.util.Random;
 
 public class test{
     public static void main(String[] args) {
-        /*double[][] x_temp = new double[5][2];
+        /**
+        double[][] x_temp = new double[5][2];
         String s = "[-3.1415928390709174, 12.275000278553842]\n" +
                 "[3.141593142539463, 2.2749996020727328]\n" +
                 "[9.42477840277364, 2.474999606016829]";
@@ -19,9 +20,9 @@ public class test{
             for (int j = 0; j < nn.length; j++) {
                 x_temp[0][j] = Double.parseDouble(nn[j].trim());
             }
-        }*/
+        }
 
-        /*double[][] x_temp = {{-Math.PI, 12.275},{Math.PI, 2.275},{3 * Math.PI, 2.475}};
+        double[][] x_temp = {{-Math.PI, 12.275},{Math.PI, 2.275},{3 * Math.PI, 2.475}};
 
         double[][] x_best = {FunLib.f4.f4_gpoint_1,FunLib.f4.f4_gpoint_2,FunLib.f4.f4_gpoint_3};
         for (int i = 0; i < x_best.length; i++) {
@@ -30,22 +31,21 @@ public class test{
             if (f_temp > f_best) {
                 System.out.println(x_temp[i][0] + ", " + x_temp[i][1] + "}; // " + f_temp);
             }
-        }*/
-        //Random rand = new Random();
-        //System.out.println(rand.nextDouble()*8);
-        //NccValue nv = new NccValue();
-        //printArray(nv.nccMatrix, 543, 452);
+        }
+        */
 
+        /*NccValue nv = new NccValue();
+        printArray(nv.nccMatrix, nv.row, nv.col);*/
     }
 
-    /*public static void printArray(double[][] array, int row, int col) {
+    public static void printArray(double[][] array, int row, int col) {
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                if (array[i][j] > 0.8848) {
+                if (array[i][j] > 0.87503) {
                     System.out.println("(" + i +", " + j + ", " + array[i][j] + ")");
                 }
             }
         }
-    }*/
+    }
 }

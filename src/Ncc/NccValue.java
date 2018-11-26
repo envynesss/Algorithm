@@ -6,11 +6,11 @@ import java.io.IOException;
 
 public class NccValue {
     public static double[][] nccMatrix;
-    public static int row = 543;
-    public static int col = 452;
+    public static int row = 422;
+    public static int col = 393;
 
     public NccValue() {
-        setNccMatrix("src/Ncc/ncc.txt", row, col);
+        setNccMatrix("src/Ncc/ncc422-393.txt", row, col);
     }
 
     public static void setNccMatrix(String filePath, int row, int col) {

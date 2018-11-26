@@ -9,12 +9,13 @@ public class NccGPoint {
     public static void main(String[] args) {
         new NccValue();
         Constant.fileChaseFW(NC.filePath, "**********************START**********************");
-        int[] np = {100, 120};
-        int[] rs = {50, 80, 100, 120};
+        int[] np = NC.NumofPs;
+        int[] rs = NC.rss;
         for (int i = 0; i < np.length; i++) {
             for (int j = 0; j < rs.length; j++) {
-                Constant.fileChaseFW(NC.filePath, "----------------NumofP = " + np[i] + " species_rs = "+ rs[j] + "----------------");
                 NC.setNPRS(np[i], rs[j]);
+                String s = "-----NumofP: " + NC.NumofP+ " rs: "+ NC.species_rs + "------独立运行" + NC.runTimes + "次后平均值为----------";
+                Constant.fileChaseFW(NC.filePath, s);
                 ParaRun();
             }
         }
@@ -23,25 +24,30 @@ public class NccGPoint {
     public static void ParaRun(){
         double[] GPointNumbers = new double[NC.runTimes];
         double[] VisitNumbers = new double[NC.runTimes];
+        double[] SeedNumbers = new double[NC.runTimes];
         double[] Time = new double[NC.runTimes];
         for (int i = 0; i < NC.runTimes; i++) {
             double[] results = run(1);
             GPointNumbers[i] = results[0];
             VisitNumbers[i] = results[1];
-            Time[i] = results[2];
+            SeedNumbers[i] = results[2];
+            Time[i] = results[3];
         }
-        String s = "";
-        s = s + "独立运行" + NC.runTimes + "次后平均值为 GPN: " + NC.average(GPointNumbers);
-        s = s + "; VN: " + NC.average(VisitNumbers);
-        s = s + "; TIME: " + NC.average(Time);
         Arrays.sort(Time);
-        s = s + ". 其中，Min time: " + Time[0] + "  Max time: " + Time[Time.length - 1];
+        String s = "";
+        s = s + "SucRate VitNum MinTime MaxTime AvgTime SeedNum: ";
+        s = s + " " + NC.round(NC.average(GPointNumbers, 1) / 4.0 * 100, 2) + "%";
+        s = s + " " + Math.round(NC.average(VisitNumbers, 0));
+        s = s + " " + Time[0] + " " + Time[Time.length - 1];
+        s = s + " " + NC.round(NC.average(Time, 0), 3);
+        s = s + " " + Math.round(NC.average(SeedNumbers, 0));
         Constant.fileChaseFW(NC.filePath, s);
     }
 
     public static double[] run(int code) {
         long sTime = new Date().getTime();
         PointSwarm swarm = new PointSwarm();
+        swarm.writeXY(0);
         swarm.setSeedList();
         for(int k = 1; k <= NC.iterations; k++){
             if (code != 0 && k > NC.iterations / 3) {
@@ -49,14 +55,14 @@ public class NccGPoint {
             }
             swarm.classification();
             swarm.move();
-            swarm.SetRedundant();
+            swarm.writeXY(k);
+            swarm.SetRedundant(k);
             swarm.setSeedList();
         }
-        /*System.out.println("Size of seedList: " + swarm.seedList.size());
-        for (int i = 0; i < NC.validSeedSize; i++) {
+        /*for (int i = 0; i < NC.validSeedSize; i++) {
             System.out.println(swarm.seedList.get(i));
         }*/
-        double[] results = new double[3];
+        double[] results = new double[4];
 
         int GPointNumber = swarm.getGPointNumber();
         results[0] = GPointNumber;
@@ -68,11 +74,17 @@ public class NccGPoint {
         String s1 = "Number of points visited: " + VisitNumber;
         //Constant.fileChaseFW(NC.filePath, s1);
 
+        int SeedNumber = swarm.getSeedNumber();
+        results[2] = SeedNumber;
+        String s2 = "Number of Seeds: " + SeedNumber;
+        //Constant.fileChaseFW(NC.filePath, s2);
+
         long eTime = new Date().getTime();
         double time = 1.0 * (eTime - sTime) / (1000);
-        results[2] = time;
-        String s2 = "run time: " + time + "S";
-        //Constant.fileChaseFW(NC.filePath, s2);
+        results[3] = time;
+        String s3 = "run time: " + time + "S";
+        //Constant.fileChaseFW(NC.filePath, s3);
+
         return results;
     }
 }
