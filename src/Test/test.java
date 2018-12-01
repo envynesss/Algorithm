@@ -3,6 +3,7 @@ package Test;
 import FunLibrary.FunLib;
 import Ncc.NccValue;
 
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -36,6 +37,31 @@ public class test{
 
         /*NccValue nv = new NccValue();
         printArray(nv.nccMatrix, nv.row, nv.col);*/
+        //System.out.println(Arrays.toString(FunLib.f9.minRange));
+        //double[] x_temp = {-7.589893, -7.708314};
+        double[][] x_temp = {
+                {-7.589893, -7.708314},
+                {-7.589893, -1.425128},
+                {-7.589893, 4.858057},
+                {-1.306708, -7.708314},
+                {-1.306708, -1.425128},
+                {-1.306708, 4.858057},
+                {4.976478, -1.425128},
+                {4.976478, -7.708314},
+                {4.976478, 4.858057},
+        };
+        for (int i = 0; i < x_temp.length; i++) {
+            double f_temp = FunLib.funLib(x_temp[i], 11);
+            System.out.println("{" + x_temp[i][0] + ", " + x_temp[i][1] + "}; // " + f_temp);
+        }
+
+    }
+
+    public static void getType(Object object){
+        String typeName=object.getClass().getName();
+        int length= typeName.lastIndexOf(".");
+        String type =typeName.substring(length+1);
+        System.out.println(type);
     }
 
     public static void printArray(double[][] array, int row, int col) {

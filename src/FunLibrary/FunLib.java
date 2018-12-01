@@ -9,7 +9,7 @@ public class FunLib {
     public static class f1{
         public static int codeNum = 1; //Function code number
         public static int Dims = 1; //Function dimension
-        public static double species_rs = 0.05; //Function species radius
+        public static double species_rs = 0.1; //Function species radius
         public static double[] maxRange = {1}; //Function max Range
         public static double[] minRange = {0}; //Function min Range
         public static double[] f1_gpoint_1 = {0.1}; // 1
@@ -17,18 +17,18 @@ public class FunLib {
         public static double[] f1_gpoint_3 = {0.5}; // 1
         public static double[] f1_gpoint_4 = {0.7}; // 1
         public static double[] f1_gpoint_5 = {0.9}; // 1
-        public static double[][] optimalpoints = {f1_gpoint_1,f1_gpoint_2,f1_gpoint_3,f1_gpoint_4,f1_gpoint_5};
-        public static double[][] gpoints = optimalpoints;
-        public static double alpha = 0.0001;
-        public static double Acc_Thr = 0.0000001; // Accuracy_Threshold
+        public static double[][] gpoints = {f1_gpoint_1,f1_gpoint_2,f1_gpoint_3,f1_gpoint_4,f1_gpoint_5};
+        public static double[][] lPoints = {};
+        public static double alpha = 1;
+        public static double DisThreshold = 10E-7; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
-
 
     //f2 function related data
     public static class f2{
         public static int codeNum = 2; //Function code number
         public static int Dims = 1; //Function dimension
-        public static double species_rs = 0.05; //Function species radius
+        public static double species_rs = 0.1; //Function species radius
         public static double[] maxRange = {1}; //Function max Range
         public static double[] minRange = {0}; //Function min Range
         public static double[] f2_gpoint_1 = {0.07969939305111944}; // 1.0
@@ -36,28 +36,29 @@ public class FunLib {
         public static double[] f2_gpoint_3 = {0.4506266992974431}; // 1.0
         public static double[] f2_gpoint_4 = {0.6814202229902825}; // 1.0
         public static double[] f2_gpoint_5 = {0.9338951933519088}; // 1.0
-        public static double[][] optimalpoints = {f2_gpoint_1,f2_gpoint_2,f2_gpoint_3,f2_gpoint_4,f2_gpoint_5};
-        public static double[][] gpoints = optimalpoints;
-        public static double alpha = 0.0001;
-        public static double Acc_Thr = 0.0000001; // Accuracy_Threshold
+        public static double[][] gpoints = {f2_gpoint_1,f2_gpoint_2,f2_gpoint_3,f2_gpoint_4,f2_gpoint_5};
+        public static double[][] lPoints = {};
+        public static double alpha = 1;
+        public static double DisThreshold = 10E-7; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
-
 
     //f3 function related data
     public static class f3{
         public static int codeNum = 3; //Function code number
         public static int Dims = 2; //Function dimension
-        public static double species_rs = 2.0; //Function species radius
+        public static double species_rs = 2.5; //Function species radius
         public static double[] maxRange = {6,6}; //Function max Range
         public static double[] minRange = {-6,-6}; //Function min Range
         public static double[] f3_gpoint_1 = {3.0,2.0}; // 200.0
-        public static double[] f3_gpoint_2 = {-2.8051183461479066, 3.131312668188017}; // 199.99999999999696
-        public static double[] f3_gpoint_3 = {-3.779310,-3.283186}; // 199.99999999999622
-        public static double[] f3_gpoint_4 = {3.5844282964246212, -1.8481264669902808}; // 199.9999999999999
-        public static double[][] optimalpoints = {f3_gpoint_1,f3_gpoint_2,f3_gpoint_3,f3_gpoint_4};
-        public static double[][] gpoints = optimalpoints;
-        public static double alpha=0.001;
-        public static double Acc_Thr = 0.00005; // Accuracy_Threshold
+        public static double[] f3_gpoint_2 = {-2.8051180668054383, 3.1313125194985973}; // 200
+        public static double[] f3_gpoint_3 = {-3.7793102424509732, -3.283186002424807}; // 200
+        public static double[] f3_gpoint_4 = {3.5844283332483275, -1.8481265260027397}; // 200
+        public static double[][] gpoints = {f3_gpoint_1,f3_gpoint_2,f3_gpoint_3,f3_gpoint_4};
+        public static double[][] lPoints = {};
+        public static double alpha = 10;
+        public static double DisThreshold = 0.00005; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
 
     //f4 function related data
@@ -70,10 +71,11 @@ public class FunLib {
         public static double[] f4_gpoint_1 = {-Math.PI, 12.275}; //-0.39788735772973816
         public static double[] f4_gpoint_2 = {Math.PI, 2.275}; //  -0.39788735772973816
         public static double[] f4_gpoint_3 = {3*Math.PI, 2.475}; //-0.39788735772973816
-        public static double[][] optimalpoints = {f4_gpoint_1,f4_gpoint_2,f4_gpoint_3};
-        public static double[][] gpoints = optimalpoints;
-        public static double alpha=0.001;
-        public static double Acc_Thr = 0.00005; // Accuracy_Threshold
+        public static double[][] gpoints = {f4_gpoint_1,f4_gpoint_2,f4_gpoint_3};
+        public static double[][] lPoints = {};
+        public static double alpha = 10;
+        public static double DisThreshold = 0.00005; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
 
     //f5 function related data
@@ -101,11 +103,12 @@ public class FunLib {
         public static double[] f5_gpoint_16 = {4.858, -7.0835}; // -186.73090120018114
         public static double[] f5_gpoint_17 = {5.4828, -1.4251}; // -186.73089783732874
         public static double[] f5_gpoint_18 = {4.858, -0.8003}; // -186.73090030703474
-        public static double[][] optimalpoints = {f5_gpoint_1,f5_gpoint_2,f5_gpoint_3,f5_gpoint_4,f5_gpoint_5,f5_gpoint_6,f5_gpoint_7,f5_gpoint_8,f5_gpoint_9,
+        public static double[][] gpoints = {f5_gpoint_1,f5_gpoint_2,f5_gpoint_3,f5_gpoint_4,f5_gpoint_5,f5_gpoint_6,f5_gpoint_7,f5_gpoint_8,f5_gpoint_9,
                 f5_gpoint_10,f5_gpoint_11,f5_gpoint_12,f5_gpoint_13,f5_gpoint_14,f5_gpoint_15,f5_gpoint_16,f5_gpoint_17,f5_gpoint_18};
-        public static double[][] gpoints = optimalpoints;
-        public static double alpha=0.01; // 未配置好
-        public static double Acc_Thr = 0.01; // Accuracy_Threshold
+        public static double[][] lPoints = {};
+        public static double alpha = 1; // 未配置好
+        public static double DisThreshold = 0.01; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
 
     //f6 function related data
@@ -119,16 +122,18 @@ public class FunLib {
         public static double[] f_gpoint_2 = {0,-4}; // 2
         public static double[] f_lpoint_3 = {-4,4}; // 1
         public static double[] f_lpoint_4 = {4,4}; // 1
-        public static double[][] optimalpoints = {f_gpoint_1,f_gpoint_2,f_lpoint_3,f_lpoint_4};
+
         public static double[][] gpoints = {f_gpoint_1,f_gpoint_2};
-        public static double alpha=0.0001;
-        public static double Acc_Thr = 0.00001; // Accuracy_Threshold
+        public static double[][] lPoints = {f_lpoint_3,f_lpoint_4};
+        public static double alpha = 1;
+        public static double DisThreshold = 0.00001; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
     //f7 function related data
     public static class f7{
         public static int codeNum = 7; //Function code number
         public static int Dims = 1; //Function dimension
-        public static double species_rs = 0.05; //Function species radius
+        public static double species_rs = 0.1; //Function species radius
         public static double[] maxRange = {1}; //Function max Range
         public static double[] minRange = {0}; //Function min Range
         public static double[] f7_gpoint_1 = {0.1}; //1.0
@@ -136,10 +141,11 @@ public class FunLib {
         public static double[] f7_lpoint_3 = {0.49883303750620595}; // 0.7078221356124454
         public static double[] f7_lpoint_4 = {0.6982497999696433}; // 0.4595462709964165
         public static double[] f7_lpoint_5 = {0.8976668561314929}; // 0.25101303015873766
-        public static double[][] optimalpoints = {f7_gpoint_1,f7_lpoint_2,f7_lpoint_3,f7_lpoint_4,f7_lpoint_5};
         public static double[][] gpoints = {f7_gpoint_1};
-        public static double alpha=0.0001; // 未配置好
-        public static double Acc_Thr = 0.00125; // Accuracy_Threshold lpoint 0.0015:2, 0.002:3, 0.0025:4
+        public static double[][] lPoints = {f7_lpoint_2,f7_lpoint_3,f7_lpoint_4,f7_lpoint_5};
+        public static double alpha = 1; // 未配置好
+        public static double DisThreshold = 0.00125; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
 
 
@@ -147,7 +153,7 @@ public class FunLib {
     public static class f8{
         public static int codeNum = 8; //Function code number
         public static int Dims = 1; //Function dimension
-        public static double species_rs = 0.05; //Function species radius
+        public static double species_rs = 0.1; //Function species radius
         public static double[] maxRange = {1}; //Function max Range
         public static double[] minRange = {0}; //Function min Range
         public static double[] f8_gpoint_1 = {0.07972916815706897}; // 0.9991090310270107
@@ -155,55 +161,66 @@ public class FunLib {
         public static double[] f8_lpoint_3 = {0.45062670094296264}; // 0.7669217995890066
         public static double[] f8_lpoint_4 = {0.6789383041085573}; // 0.4823351006413628
         public static double[] f8_lpoint_5 = {0.9297342454298296}; // 0.22341336187772662
-        public static double[][] optimalpoints = {f8_gpoint_1,f8_lpoint_2,f8_lpoint_3,f8_lpoint_4,f8_lpoint_5};
-        public static double[][] gpoints = {f8_gpoint_1};
-        public static double alpha=0.0001; // 未配置好
-        public static double Acc_Thr = 0.00125; // Accuracy_Threshold
+        public static double[][] gpoints = {f8_gpoint_1,};
+        public static double[][] lPoints = {f8_lpoint_2,f8_lpoint_3,f8_lpoint_4,f8_lpoint_5};
+        public static double alpha = 1; // 未配置好
+        public static double DisThreshold = 0.00125; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
 
 
     //f9 function related data
     public static class f9{
         public static int codeNum = 9; //Function code number
-        public static int Dims = 2; //Function dimension
-        public static double species_rs = 2.5; //Function species radius
-        public static double[] maxRange = {5,5}; //Function max Range
-        public static double[] minRange = {-5,-5}; //Function min Range
-        public static double[] f_gpoint_1 = {0,0}; // 0
-        public static double[][] optimalpoints = {f_gpoint_1};
-        public static double[][] gpoints = optimalpoints;
-        public static double alpha=0.001;
-        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+        public static int Dims = 30; //Function dimension
+        public static double species_rs = Math.pow(Dims, 0.5) * 100; //Function species radius
+        public static double[] maxRange = getArray(Dims, 100); //Function max Range
+        public static double[] minRange = getArray(Dims, -100); //Function min Range
+        public static double[] f_gpoint_1 = getArray(Dims, 0); // 0
+        public static double[][] gpoints = {f_gpoint_1};
+        public static double[][] lPoints = {};
+        public static double alpha = 10;
+        public static double DisThreshold = 0.01; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-3; // 与最优点的相对适应值临界值
     }
 
 
     //f10 function related data
     public static class f10{
         public static int codeNum = 10; //Function code number
-        public static int Dims = 2; //Function dimension
-        public static double species_rs = 2.5; //Function species radius
-        public static double[] maxRange = {5,5}; //Function max Range
-        public static double[] minRange = {-5,-5}; //Function min Range
-        public static double[] f10_gpoint_1 = {0,0}; // 0
-        public static double[][] optimalpoints = {f10_gpoint_1};
-        public static double[][] gpoints = optimalpoints;
-        public static double alpha=0.001;
-        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+        public static int Dims = 30; //Function dimension
+        public static double species_rs = Math.pow(Dims, 0.5) * 70; //Function species radius
+        public static double[] maxRange = getArray(Dims, 100); //Function max Range
+        public static double[] minRange = getArray(Dims, -100); //Function min Range
+        public static double[] f10_gpoint_1 = getArray(Dims, 0); // 0
+        public static double[][] gpoints = {f10_gpoint_1};
+        public static double[][] lPoints = {};
+        public static double alpha = 10;
+        public static double DisThreshold = 0.01; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-3; // 与最优点的相对适应值临界值
     }
 
     //f11 function related data
     public static class f11{
         public static int codeNum = 11; //Function code number
         public static int Dims = 2; //Function dimension
-        public static double species_rs = 0.5; //Function species radius
-        public static double[] maxRange = {1.5,1.5}; //Function max Range
-        public static double[] minRange = {-1.5,-1.5}; //Function min Range
-        public static double[] f11_gpoint_1 = {0,0}; // 0
-        public static double[] f11_2point_2 = {0,0}; // TODO：局部最优
-        public static double[][] optimalpoints = {f11_gpoint_1}; //TODO：局部最优
-        public static double[][] gpoints = {f11_gpoint_1};
-        public static double alpha=0.001; // 未配置好
-        public static double Acc_Thr = 0.0001; // Accuracy_Threshold
+        public static double species_rs = 5; //Function species radius
+        public static double[] maxRange = {10,10}; //Function max Range
+        public static double[] minRange = {-10,-10}; //Function min Range
+        public static double[] f11_gpoint_1 = {-7.589893, -7.708314}; // 176.54179313659145
+        public static double[] f11_gpoint_2 = {-7.589893, -1.425128}; // 176.5417931363413
+        public static double[] f11_gpoint_3 = {-7.589893, 4.858057}; // 176.54179313671324
+        public static double[] f11_gpoint_4 = {-1.306708, -7.708314}; // 176.54179313652003
+        public static double[] f11_gpoint_5 = {-1.306708, -1.425128}; // 176.5417931362699
+        public static double[] f11_gpoint_6 = {-1.306708, 4.858057}; // 176.54179313664181
+        public static double[] f11_gpoint_7 = {4.976478, -7.708314}; // 176.54179313621344
+        public static double[] f11_gpoint_8 = {4.976478, -1.425128}; // 176.5417931364636
+        public static double[] f11_gpoint_9 = {4.976478, 4.858057}; // 176.5417931365854
+        public static double[][] gpoints = {f11_gpoint_1,f11_gpoint_2,f11_gpoint_3,f11_gpoint_4,f11_gpoint_5,f11_gpoint_6,f11_gpoint_7,f11_gpoint_8,f11_gpoint_9};
+        public static double[][] lPoints = {};
+        public static double alpha = 15; // 未配置好
+        public static double DisThreshold = 0.001; // 与最优点的距离临界值
+        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
     }
 
     /**
@@ -265,32 +282,45 @@ public class FunLib {
 
             case 9:
                 for(int i=0;i<f9.Dims;i++){
-                    fitness = fitness + Math.pow(x[i],2);
+                    fitness = fitness + Math.pow(x[i], 2);
                 }
-                fitness = -fitness;
+                fitness = -(fitness + 1);
                 break;
 
             case 10:
-                for(int i=0;i<f10.Dims;i++){
+                for(int i = 0; i < f10.Dims; i++){
                     double temp10 = 0;
                     for (int j = 0; j <= i; j++) {
                         temp10 = temp10 + x[j];
                     }
                     fitness = fitness + Math.pow(temp10,2);
                 }
-                fitness = -fitness;
+                fitness = -(fitness + 1);
                 break;
 
             case 11:
-                for(int i=0;i<FunLib.f11.Dims;i++){
-                    fitness = fitness + (Math.pow(x[i],2)-10*Math.cos(2*Math.PI*x[i])+10);
+                double temp1 = 0;
+                double temp2 = 0;
+                for(int i = 0; i <= 4; i++){
+                    temp1 = temp1 + (i + 1) * Math.cos(i * x[0] + i + 1);
                 }
-                fitness = -fitness;
+                for(int j = 0; j <= 4; j++){
+                    temp2 = temp2 + (j + 1) * Math.cos((j + 2) * x[1] + j + 1);
+                }
+                fitness = -temp1 * temp2;
                 break;
 
             default:
                 break;
         }
         return fitness;
+    }
+
+    public static double[] getArray(int d, int value) {
+        double[] array = new double[d];
+        for (int i = 0; i < d; i++) {
+            array[i] = value;
+        }
+        return array;
     }
 }

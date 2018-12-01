@@ -7,7 +7,9 @@ public class speciesNSwarm extends speciesSwarm{
     @Override
     public void setSeedList() {
         seedList.clear();
-        int rs = Constant.NumofP / (Constant.optimalpoints.length * 3);
+        int len1 = Constant.gPoints.length;
+        int len2 = Constant.lPoints.length;
+        int rs = Constant.NumofP / ((len1 + len2) * 3);
         int unprocessed_num = fireflyList.size();
         for (int i = 0; i < fireflyList.size(); i++) {
             fireflyList.get(i).isProcessed = false;
@@ -16,7 +18,7 @@ public class speciesNSwarm extends speciesSwarm{
             boolean foundseed = true;
             firefly best_firefly = best_firefly(fireflyList);
             for(int j = 0; j < seedList.size(); j++){
-                if(distance(best_firefly, seedList.get(j)) < Constant.species_rs){
+                if(distance(best_firefly, seedList.get(j)) < Constant.speciesRs){
                     best_firefly.x = new firefly().x;
                     best_firefly.fitnessfun();
                     best_firefly.isProcessed = true;
@@ -32,7 +34,7 @@ public class speciesNSwarm extends speciesSwarm{
                 neibor_num_list = Constant.get_neibor_num_list(Constant.NumofP, k, rs);
                 for (int i = 0; i < neibor_num_list.size(); i++) {
                     for (int j = 0; j < fireflyList.size(); j++) {
-                        if (neibor_num_list.get(i) == fireflyList.get(j).number && fireflyList.get(j).isProcessed == false) {
+                        if (neibor_num_list.get(i) == fireflyList.get(j).number && !fireflyList.get(j).isProcessed) {
                             fireflyList.get(j).seed = best_firefly;
                             fireflyList.get(j).isProcessed = true;
                             unprocessed_num--;
@@ -41,11 +43,6 @@ public class speciesNSwarm extends speciesSwarm{
                 }
             }
         }
-        /*System.out.print("seedlist length:"+seedList.size()+ " seeds：");
-        for(int i = 0; i < seedList.size(); i++){
-            System.out.print( "#" + seedList.get(i).number + " " + seedList.get(i).fitnessfun() + ", ");
-        }
-        System.out.println();*/
     }
 
     /**

@@ -10,28 +10,28 @@ import java.util.*;
 public class Constant{
 
     public static final int NumofP = 100;
-    //γ为light_absorption光吸收率属于[0.1,10],its setting depends on the problem to be optimized.
-    public static final double gamma=0.9;
-    //β0
-    public static final double beta0=0.1;
-    //α为Step factor步长因子属于[0,1]
-    //public static double alpha=0.001; // 函数中配置
+    //γ为light_absorption光吸收率属于[0.1,10]
+    public static final double gamma = 1;
+    //β0, 一般取1
+    public static final double beta0 = 1;
+    //α为Step factor步长因子属于[0,1] alpha在函数中配置
 
     public static int iterations = 30000; //迭代次数
     public static int runTimes = 1; //独立运行次数
     public static int CBLS_step = 5; //局域搜索的探索次数
-    public static double CBLS_move = 0.00000001; //局域搜索的移动距离
+    public static double CBLS_move = 0.000001; //局域搜索的移动距离
 
     //函数相关参数
     public static int codeNum;
     public static int funDims;
-    public static double species_rs;
+    public static double speciesRs;
     public static double[] maxRange;
     public static double[] minRange;
-    public static double[][] optimalpoints;
-    public static double[][] gpoints;
+    public static double[][] lPoints;
+    public static double[][] gPoints;
     public static double alpha;
-    public static double Acc_Thr;
+    public static double DisThreshold; // 与最优点的距离临界值
+    public static double FitThreshold; // 与最优点的相对适应值临界值
 
     //输出文件路径
     public static String folder = "z-output/";
@@ -41,16 +41,17 @@ public class Constant{
      * Function 函数相关参数社设置
      */
     public static void setFuncPara(int code_Num, int fun_Dims, double species_Rs, double[] max_Range, double[] min_Range,
-                                   double[][] optimal_points, double[][] g_points, double Alpha, double acc_Thr) {
+                                   double[][] l_Points, double[][] g_Points, double alpha, double Dis_Threshold, double Fit_Threshold) {
         Constant.codeNum = code_Num;
         Constant.funDims = fun_Dims;
-        Constant.species_rs = species_Rs;
+        Constant.speciesRs = species_Rs;
         Constant.maxRange = max_Range;
         Constant.minRange = min_Range;
-        Constant.optimalpoints = optimal_points;
-        Constant.gpoints = g_points;
-        Constant.alpha = Alpha;
-        Constant.Acc_Thr = acc_Thr;
+        Constant.lPoints = l_Points;
+        Constant.gPoints = g_Points;
+        Constant.alpha = alpha;
+        Constant.DisThreshold = Dis_Threshold;
+        Constant.FitThreshold = Fit_Threshold;
     }
 
     /**
@@ -133,16 +134,6 @@ public class Constant{
             System.out.println(content);
         } catch (IOException e) {
             System.out.println("文件写入失败！" + e);
-        }
-    }
-
-    public static void printArray(double[][] array, int row, int col) {
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                System.out.print(array[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 }
