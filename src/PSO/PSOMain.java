@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PSOMain {
-    public static int[] isRunFun = {10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}; // 十个函数是否运行，[1]开始，1代表运行
+    public static int[] isRunFun = {10, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0}; // 十个函数是否运行，[1]开始，1代表运行
     public static int[] isRunSwarm = {2, 0, 1}; // 2类种群机制是否运行，index[1]开始，1代表运行
     public static void main(String[] args) {
         long sTime = new Date().getTime();
@@ -20,19 +20,15 @@ public class PSOMain {
     public static List<Double> runSwarm(int code, Swarm swarm){
         swarm.setSeedList();
         for(int k = 1; k <= Constant.iterations; k++){
-            /*for (int i = 0; i < swarm.particleList.size(); i++) {
-                System.out.println(swarm.particleList.get(i));
-            }
-            System.out.println();*/
             swarm.move();
             swarm.setSeedList();
             swarm.setFirstTime(k);
         }
+        System.out.println(swarm.seedList.size());
         for (int i = 0; i < swarm.seedList.size(); i++) {
             System.out.println(swarm.seedList.get(i));
         }
         System.out.println();
-
         return swarm.getResultList();
     }
 
@@ -112,13 +108,6 @@ public class PSOMain {
             Firefly.Constant.fileChaseFW(Constant.filePath, str);
             runWhichSwarm();
         }
-        if (isRunFun[11] == 1) {
-            FunLib.f11 f11 = new FunLib.f11();
-            Constant.setFuncPara(f11.codeNum,f11.Dims,f11.species_rs,f11.maxRange,f11.minRange,f11.lPoints,f11.gpoints,f11.DisThreshold,f11.FitThreshold);
-            str = "********************f11 function start*********************";
-            Firefly.Constant.fileChaseFW(Constant.filePath, str);
-            runWhichSwarm();
-        }
     }
 
     /**
@@ -143,7 +132,7 @@ public class PSOMain {
         double[] arrAccuracy = new double[times];
         double[] arrVRate = new double[times];
         double[] arrLPumber = new double[times];
-        double[] minTimes = new double[times];
+        double[] arrMinTimes = new double[times];
         for (int i = 0; i < times; i++) {
             switch (code){
                 case 1:
@@ -160,13 +149,25 @@ public class PSOMain {
             arrAccuracy[i] = resultList.get(0);
             arrVRate[i] = resultList.get(1);
             arrLPumber[i] = resultList.get(2);
-            minTimes[i] = resultList.get(3);
+            arrMinTimes[i] = resultList.get(3);
         }
-        s = s + "\n独立运行" + times + "次后平均值为  ACC=" + Firefly.Constant.average(arrAccuracy, 1); // 准确性
-        s = s + "; SR=" + Firefly.Constant.average(arrVRate, 0); // 成功率
-        s = s + "; LOP=" + Firefly.Constant.average(arrLPumber, 0); // 局部最优值个数
-        s = s + "; MR=" + Firefly.Constant.average(minTimes, 0); // 最小收敛速度
+
+        double accuracy = Firefly.Constant.average(arrAccuracy, 1);
+        double VRate = Firefly.Constant.average(arrVRate, 0);
+        double LPumber = Firefly.Constant.average(arrLPumber, 0);
+        double minTimes = Firefly.Constant.average(arrMinTimes, 0);
+        s = s + " 独立运行" + times + "次后平均值为  ACC=" + accuracy; // 准确性
+        s = s + "; SR=" + VRate; // 成功率
+        s = s + "; LOP=" + LPumber; // 局部最优值个数
+        s = s + "; MR=" + minTimes; // 最小收敛速度
         Firefly.Constant.fileChaseFW(Constant.filePath, s);
+
+        List<Double> list = new ArrayList<>();
+        list.add(accuracy);
+        list.add(VRate);
+        list.add(minTimes);
+        list.add(LPumber);
+        //Firefly.Constant.writeExcel(list, Firefly.Constant.XlsxPath, Constant.codeNum + 15, 1);
     }
 }
 

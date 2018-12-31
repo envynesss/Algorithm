@@ -5,7 +5,7 @@ public class Constant {
     public static final double w = 0.729844;
     public static final double ran1 = 0.9280770459248898;
     public static final double ran2 = 0.2554051873354638;
-    public static final double c1 = 2.05;//1.4962;
+    public static final double c1 = 1.4962;
     public static final double c2 = c1;
     public static final double v = 0.5;
 

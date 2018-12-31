@@ -258,11 +258,17 @@ public class Swarm {
             for(int j = 0; j < seedList.size(); j++){
                 firefly fi = gPointList.get(i);
                 firefly fj = seedList.get(j);
-                if( distance(fi, fj) < Constant.DisThreshold){
+                double FitThreshold = Math.abs(fi.fitnessfun() - fj.fitnessfun());
+                if(distance(fi, fj) < (Constant.speciesRs / 4) && FitThreshold < Constant.FitThreshold){
                     is_within = true;
                     sum = sum + Math.abs((gPointList.get(i).fitnessfun() - seedList.get(j).fitnessfun()));
                     gPointNumber++;
                 }
+                /*if( distance(fi, fj) < Constant.DisThreshold){
+                    is_within = true;
+                    sum = sum + Math.abs((gPointList.get(i).fitnessfun() - seedList.get(j).fitnessfun()));
+                    gPointNumber++;
+                }*/
             }
             if(!is_within){
                 sum = sum + Math.abs((gPointList.get(i).fitnessfun() - 0));
@@ -273,7 +279,7 @@ public class Swarm {
     }
 
     /**
-     * 设置收敛速度函数
+     * 设置收敛速度函数,搜索到所有全局最优值的最少迭代次数
      */
     public void setFirstTime(int k) {
         if (isFirstTime) return;
@@ -296,9 +302,6 @@ public class Swarm {
         if (gPointNum == gPointLen) {
             firstTime = k;
             isFirstTime = true;
-            /*for (int i = 0; i < seedList.size(); i++) {
-                System.out.println(seedList.get(i));
-            }*/
         }
     }
 

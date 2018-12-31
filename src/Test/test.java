@@ -1,16 +1,20 @@
 package Test;
 
+import Firefly.Constant;
 import FunLibrary.FunLib;
 import Ncc.NccValue;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 
-public class test{
+public class test {
     public static void main(String[] args) {
-        /**
-        double[][] x_temp = new double[5][2];
+        /*double[][] x_temp = new double[5][2];
         String s = "[-3.1415928390709174, 12.275000278553842]\n" +
                 "[3.141593142539463, 2.2749996020727328]\n" +
                 "[9.42477840277364, 2.474999606016829]";
@@ -35,11 +39,7 @@ public class test{
         }
         */
 
-        /*NccValue nv = new NccValue();
-        printArray(nv.nccMatrix, nv.row, nv.col);*/
-        //System.out.println(Arrays.toString(FunLib.f9.minRange));
-        //double[] x_temp = {-7.589893, -7.708314};
-        double[][] x_temp = {
+        /*double[][] x_temp = {
                 {-7.589893, -7.708314},
                 {-7.589893, -1.425128},
                 {-7.589893, 4.858057},
@@ -53,14 +53,17 @@ public class test{
         for (int i = 0; i < x_temp.length; i++) {
             double f_temp = FunLib.funLib(x_temp[i], 11);
             System.out.println("{" + x_temp[i][0] + ", " + x_temp[i][1] + "}; // " + f_temp);
-        }
+        }*/
 
+        String s1 = "Echo State Networks Based Data-Driven Adaptive Fault Tolerant Control With Its Application to Electromechanical System";
+        String s2 = "Echo State Networks Based Data-Driven Adaptive Fault Tolerant Control With Its Application to Electromechanical System";
+        System.out.println(s1==s2);
     }
 
-    public static void getType(Object object){
-        String typeName=object.getClass().getName();
-        int length= typeName.lastIndexOf(".");
-        String type =typeName.substring(length+1);
+    public static void getType(Object object) {
+        String typeName = object.getClass().getName();
+        int length = typeName.lastIndexOf(".");
+        String type = typeName.substring(length + 1);
         System.out.println(type);
     }
 
@@ -69,7 +72,7 @@ public class test{
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (array[i][j] > 0.87503) {
-                    System.out.println("(" + i +", " + j + ", " + array[i][j] + ")");
+                    System.out.println("(" + i + ", " + j + ", " + array[i][j] + ")");
                 }
             }
         }

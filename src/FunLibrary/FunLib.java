@@ -20,8 +20,8 @@ public class FunLib {
         public static double[][] gpoints = {f1_gpoint_1,f1_gpoint_2,f1_gpoint_3,f1_gpoint_4,f1_gpoint_5};
         public static double[][] lPoints = {};
         public static double alpha = 1;
-        public static double DisThreshold = 10E-7; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double DisThreshold = 1E-7; // 与最优点的距离临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
     }
 
     //f2 function related data
@@ -39,8 +39,8 @@ public class FunLib {
         public static double[][] gpoints = {f2_gpoint_1,f2_gpoint_2,f2_gpoint_3,f2_gpoint_4,f2_gpoint_5};
         public static double[][] lPoints = {};
         public static double alpha = 1;
-        public static double DisThreshold = 10E-7; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double DisThreshold = 1E-7; // 与最优点的距离临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
     }
 
     //f3 function related data
@@ -58,7 +58,7 @@ public class FunLib {
         public static double[][] lPoints = {};
         public static double alpha = 10;
         public static double DisThreshold = 0.00005; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
     }
 
     //f4 function related data
@@ -75,40 +75,31 @@ public class FunLib {
         public static double[][] lPoints = {};
         public static double alpha = 10;
         public static double DisThreshold = 0.00005; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
     }
 
     //f5 function related data
     public static class f5{
         public static int codeNum = 5; //Function code number
         public static int Dims = 2; //Function dimension
-        public static double species_rs = 2.5; //Function species radius
-        public static double[] maxRange = {8,8}; //Function max Range
+        public static double species_rs = 5; //Function species radius
+        public static double[] maxRange = {10,10}; //Function max Range
         public static double[] minRange = {-10,-10}; //Function min Range
-        public static double[] f5_gpoint_1 = {-7.0835, 4.8580}; // -186.73090120018114
-        public static double[] f5_gpoint_2 = {-7.0835, -7.7083}; // -186.730908300575
-        public static double[] f5_gpoint_3 = {-1.4251, -7.0835}; // -186.73090685668902
-        public static double[] f5_gpoint_4 = {5.4828, 4.858}; // -186.73089218082114
-        public static double[] f5_gpoint_5 = {-1.4251, -0.8003}; // -186.7309059635426
-        public static double[] f5_gpoint_6 = {4.858, 5.4828}; // -186.73089218082114
-        public static double[] f5_gpoint_7 = {-7.7083, -7.0835}; // -186.730908300575
-        public static double[] f5_gpoint_8 = {-7.0835, -1.4251}; // -186.73090685668902
-        public static double[] f5_gpoint_9 = {-7.7083, -0.8003}; // -186.73090740742856
-        public static double[] f5_gpoint_10 = {-7.7083, 5.4828}; // -186.73089928121468
-        public static double[] f5_gpoint_11 = {-0.8003, -7.7083}; // -186.73090740742856
-        public static double[] f5_gpoint_12 = {-0.8003, -1.4251}; // -186.7309059635426
-        public static double[] f5_gpoint_13 = {-0.8003, 4.858}; // -186.73090030703474
-        public static double[] f5_gpoint_14 = {-1.4251, 5.4828}; // -186.73089783732874
-        public static double[] f5_gpoint_15 = {5.4828, -7.7083}; // -186.73089928121468
-        public static double[] f5_gpoint_16 = {4.858, -7.0835}; // -186.73090120018114
-        public static double[] f5_gpoint_17 = {5.4828, -1.4251}; // -186.73089783732874
-        public static double[] f5_gpoint_18 = {4.858, -0.8003}; // -186.73090030703474
-        public static double[][] gpoints = {f5_gpoint_1,f5_gpoint_2,f5_gpoint_3,f5_gpoint_4,f5_gpoint_5,f5_gpoint_6,f5_gpoint_7,f5_gpoint_8,f5_gpoint_9,
-                f5_gpoint_10,f5_gpoint_11,f5_gpoint_12,f5_gpoint_13,f5_gpoint_14,f5_gpoint_15,f5_gpoint_16,f5_gpoint_17,f5_gpoint_18};
+        public static double[] f5_gpoint_1 = {-7.589893, -7.708314}; // 176.54179313659145
+        public static double[] f5_gpoint_2 = {-7.589893, -1.425128}; // 176.5417931363413
+        public static double[] f5_gpoint_3 = {-7.589893, 4.858057}; // 176.54179313671324
+        public static double[] f5_gpoint_4 = {-1.306708, -7.708314}; // 176.54179313652003
+        public static double[] f5_gpoint_5 = {-1.306708, -1.425128}; // 176.5417931362699
+        public static double[] f5_gpoint_6 = {-1.306708, 4.858057}; // 176.54179313664181
+        public static double[] f5_gpoint_7 = {4.976478, -7.708314}; // 176.54179313621344
+        public static double[] f5_gpoint_8 = {4.976478, -1.425128}; // 176.5417931364636
+        public static double[] f5_gpoint_9 = {4.976478, 4.858057}; // 176.5417931365854
+        public static double[][] gpoints = {f5_gpoint_1,f5_gpoint_2,f5_gpoint_3,f5_gpoint_4,f5_gpoint_5,f5_gpoint_6,f5_gpoint_7,f5_gpoint_8,f5_gpoint_9};
         public static double[][] lPoints = {};
-        public static double alpha = 1; // 未配置好
-        public static double DisThreshold = 0.01; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double alpha = 15; // 未配置好
+        public static double DisThreshold = 0.001; // 与最优点的距离临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
+
     }
 
     //f6 function related data
@@ -127,7 +118,7 @@ public class FunLib {
         public static double[][] lPoints = {f_lpoint_3,f_lpoint_4};
         public static double alpha = 1;
         public static double DisThreshold = 0.00001; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
     }
     //f7 function related data
     public static class f7{
@@ -145,7 +136,7 @@ public class FunLib {
         public static double[][] lPoints = {f7_lpoint_2,f7_lpoint_3,f7_lpoint_4,f7_lpoint_5};
         public static double alpha = 1; // 未配置好
         public static double DisThreshold = 0.00125; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
     }
 
 
@@ -165,7 +156,7 @@ public class FunLib {
         public static double[][] lPoints = {f8_lpoint_2,f8_lpoint_3,f8_lpoint_4,f8_lpoint_5};
         public static double alpha = 1; // 未配置好
         public static double DisThreshold = 0.00125; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
     }
 
 
@@ -173,7 +164,7 @@ public class FunLib {
     public static class f9{
         public static int codeNum = 9; //Function code number
         public static int Dims = 30; //Function dimension
-        public static double species_rs = Math.pow(Dims, 0.5) * 100; //Function species radius
+        public static double species_rs = Math.pow(Dims, 0.5) * 60; //Function species radius
         public static double[] maxRange = getArray(Dims, 100); //Function max Range
         public static double[] minRange = getArray(Dims, -100); //Function min Range
         public static double[] f_gpoint_1 = getArray(Dims, 0); // 0
@@ -181,7 +172,7 @@ public class FunLib {
         public static double[][] lPoints = {};
         public static double alpha = 10;
         public static double DisThreshold = 0.01; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-3; // 与最优点的相对适应值临界值
+        public static double FitThreshold = 1E-3; // 与最优点的相对适应值临界值
     }
 
 
@@ -189,7 +180,7 @@ public class FunLib {
     public static class f10{
         public static int codeNum = 10; //Function code number
         public static int Dims = 30; //Function dimension
-        public static double species_rs = Math.pow(Dims, 0.5) * 70; //Function species radius
+        public static double species_rs = Math.pow(Dims, 0.5) * 60; //Function species radius
         public static double[] maxRange = getArray(Dims, 100); //Function max Range
         public static double[] minRange = getArray(Dims, -100); //Function min Range
         public static double[] f10_gpoint_1 = getArray(Dims, 0); // 0
@@ -197,30 +188,40 @@ public class FunLib {
         public static double[][] lPoints = {};
         public static double alpha = 10;
         public static double DisThreshold = 0.01; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-3; // 与最优点的相对适应值临界值
+        public static double FitThreshold = 1E-3; // 与最优点的相对适应值临界值
     }
 
     //f11 function related data
     public static class f11{
         public static int codeNum = 11; //Function code number
         public static int Dims = 2; //Function dimension
-        public static double species_rs = 5; //Function species radius
-        public static double[] maxRange = {10,10}; //Function max Range
+        public static double species_rs = 2.5; //Function species radius
+        public static double[] maxRange = {8,8}; //Function max Range
         public static double[] minRange = {-10,-10}; //Function min Range
-        public static double[] f11_gpoint_1 = {-7.589893, -7.708314}; // 176.54179313659145
-        public static double[] f11_gpoint_2 = {-7.589893, -1.425128}; // 176.5417931363413
-        public static double[] f11_gpoint_3 = {-7.589893, 4.858057}; // 176.54179313671324
-        public static double[] f11_gpoint_4 = {-1.306708, -7.708314}; // 176.54179313652003
-        public static double[] f11_gpoint_5 = {-1.306708, -1.425128}; // 176.5417931362699
-        public static double[] f11_gpoint_6 = {-1.306708, 4.858057}; // 176.54179313664181
-        public static double[] f11_gpoint_7 = {4.976478, -7.708314}; // 176.54179313621344
-        public static double[] f11_gpoint_8 = {4.976478, -1.425128}; // 176.5417931364636
-        public static double[] f11_gpoint_9 = {4.976478, 4.858057}; // 176.5417931365854
-        public static double[][] gpoints = {f11_gpoint_1,f11_gpoint_2,f11_gpoint_3,f11_gpoint_4,f11_gpoint_5,f11_gpoint_6,f11_gpoint_7,f11_gpoint_8,f11_gpoint_9};
+        public static double[] f11_gpoint_1 = {-7.0835, 4.8580}; // -186.73090120018114
+        public static double[] f11_gpoint_2 = {-7.0835, -7.7083}; // -186.730908300575
+        public static double[] f11_gpoint_3 = {-1.4251, -7.0835}; // -186.73090685668902
+        public static double[] f11_gpoint_4 = {5.4828, 4.858}; // -186.73089218082114
+        public static double[] f11_gpoint_5 = {-1.4251, -0.8003}; // -186.7309059635426
+        public static double[] f11_gpoint_6 = {4.858, 5.4828}; // -186.73089218082114
+        public static double[] f11_gpoint_7 = {-7.7083, -7.0835}; // -186.730908300575
+        public static double[] f11_gpoint_8 = {-7.0835, -1.4251}; // -186.73090685668902
+        public static double[] f11_gpoint_9 = {-7.7083, -0.8003}; // -186.73090740742856
+        public static double[] f11_gpoint_10 = {-7.7083, 5.4828}; // -186.73089928121468
+        public static double[] f11_gpoint_11 = {-0.8003, -7.7083}; // -186.73090740742856
+        public static double[] f11_gpoint_12 = {-0.8003, -1.4251}; // -186.7309059635426
+        public static double[] f11_gpoint_13 = {-0.8003, 4.858}; // -186.73090030703474
+        public static double[] f11_gpoint_14 = {-1.4251, 5.4828}; // -186.73089783732874
+        public static double[] f11_gpoint_15 = {5.4828, -7.7083}; // -186.73089928121468
+        public static double[] f11_gpoint_16 = {4.858, -7.0835}; // -186.73090120018114
+        public static double[] f11_gpoint_17 = {5.4828, -1.4251}; // -186.73089783732874
+        public static double[] f11_gpoint_18 = {4.858, -0.8003}; // -186.73090030703474
+        public static double[][] gpoints = {f11_gpoint_1,f11_gpoint_2,f11_gpoint_3,f11_gpoint_4,f11_gpoint_5,f11_gpoint_6,f11_gpoint_7,f11_gpoint_8,f11_gpoint_9,
+                f11_gpoint_10,f11_gpoint_11,f11_gpoint_12,f11_gpoint_13,f11_gpoint_14,f11_gpoint_15,f11_gpoint_16,f11_gpoint_17,f11_gpoint_18};
         public static double[][] lPoints = {};
-        public static double alpha = 15; // 未配置好
-        public static double DisThreshold = 0.001; // 与最优点的距离临界值
-        public static double FitThreshold = 10E-6; // 与最优点的相对适应值临界值
+        public static double alpha = 1; // 未配置好
+        public static double DisThreshold = 0.01; // 与最优点的距离临界值
+        public static double FitThreshold = 1E-6; // 与最优点的相对适应值临界值
     }
 
     /**
@@ -251,15 +252,15 @@ public class FunLib {
                 break;
 
             case 5:
-                fitness = 1;
-                for (int i = 0; i <= 1; i++) {
-                    double temp = 0;
-                    for (int j = 1; j <= 5; j++) {
-                        temp = temp+j*Math.cos((j+1)*x[i]+j);
-                    }
-                    fitness = fitness * temp;
+                double temp51 = 0;
+                double temp52 = 0;
+                for(int i = 0; i <= 4; i++){
+                    temp51 = temp51 + (i + 1) * Math.cos(i * x[0] + i + 1);
                 }
-                fitness = -fitness;
+                for(int j = 0; j <= 4; j++){
+                    temp52 = temp52 + (j + 1) * Math.cos((j + 2) * x[1] + j + 1);
+                }
+                fitness = -temp51 * temp52;
                 break;
 
             case 6:
@@ -299,15 +300,15 @@ public class FunLib {
                 break;
 
             case 11:
-                double temp1 = 0;
-                double temp2 = 0;
-                for(int i = 0; i <= 4; i++){
-                    temp1 = temp1 + (i + 1) * Math.cos(i * x[0] + i + 1);
+                fitness = 1;
+                for (int i = 0; i <= 1; i++) {
+                    double temp11 = 0;
+                    for (int j = 1; j <= 5; j++) {
+                        temp11 = temp11 + j * Math.cos((j + 1) * x[i] + j);
+                    }
+                    fitness = fitness * temp11;
                 }
-                for(int j = 0; j <= 4; j++){
-                    temp2 = temp2 + (j + 1) * Math.cos((j + 2) * x[1] + j + 1);
-                }
-                fitness = -temp1 * temp2;
+                fitness = -fitness;
                 break;
 
             default:

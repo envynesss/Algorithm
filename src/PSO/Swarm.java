@@ -123,7 +123,8 @@ class Swarm{
             for(int j = 0; j < seedList.size(); j++){
                 Particle pi = gPointList.get(i);
                 Particle pj = seedList.get(j);
-                if( distance(pi, pj) < Constant.DisThreshold){
+                double FitThreshold = Math.abs(pi.fitnessfun() - pj.fitnessfun());
+                if(distance(pi, pj) < (Constant.speciesRs / 4) && FitThreshold < Constant.FitThreshold){
                     is_within = true;
                     sum = sum + Math.abs((gPointList.get(i).fitnessfun() - seedList.get(j).fitnessfun()));
                     gPointNumber++;
